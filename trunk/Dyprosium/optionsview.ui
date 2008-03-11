@@ -1,0 +1,313 @@
+<ui version="4.0" >
+ <class>OptionsView</class>
+ <widget class="QWidget" name="OptionsView" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>331</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>OptionsView</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" />
+   </item>
+   <item>
+    <widget class="TitleWidget" native="1" name="titleWidget" />
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="controlsStack" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="pageIntro" >
+      <layout class="QVBoxLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label" >
+         <property name="text" >
+          <string>Les options sont paramètres de configuration supplementaires qu'un serveur DHCP peut assigner à ses clients. Par exemple, certaines options courament utilisées incluent les adresses IP pour les passerelles par défaut (routeurs), les serveurs WINS et les serveurs DNS.</string>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblVariant" >
+         <property name="text" >
+          <string>Les options de serveur agissent par défaut sur toutes les étendues. Vous pouvez remplacer chacune de ces options en definissant l'option dans les options d'étendue.</string>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="label_8" >
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="pixmap" >
+            <pixmap resource="dyprosium.qrc" >:/images/Resources/lightbulb.png</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QLabel" name="label_4" >
+             <property name="text" >
+              <string>Les options de serveur agissent par défaut pour toutes les etendues. Vous pouvez remplacer chacune de ces options de serveur en définissant l'option dans les options d'étendue.</string>
+             </property>
+             <property name="wordWrap" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_6" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text" >
+              <string>Les options d'etendue remplacent les options de serveurs.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_9" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text" >
+              <string>Les options de réservation remplacent les options d'étendue et de serveur.</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text" >
+          <string>Pour définir les options, cliquez sur Ajouter Option.</string>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3" >
+         <property name="text" >
+          <string>Pour plus d'informations sur les options, consultez la documentation de votre DHCPd.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnAddOption" >
+         <property name="text" >
+          <string>Ajouter option</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pageView" >
+      <layout class="QVBoxLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QTableWidget" name="tableOptions" >
+           <property name="editTriggers" >
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="alternatingRowColors" >
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode" >
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior" >
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <column>
+            <property name="text" >
+             <string>ID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text" >
+             <string>Option name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text" >
+             <string>Value</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QToolButton" name="btnAdd" >
+             <property name="text" >
+              <string/>
+             </property>
+             <property name="icon" >
+              <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="btnRemove" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string/>
+             </property>
+             <property name="icon" >
+              <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="btnEdit" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="icon" >
+              <iconset resource="dyprosium.qrc" >:/images/Resources/pencil.png</iconset>
+             </property>
+             <property name="checked" >
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>TitleWidget</class>
+   <extends>QWidget</extends>
+   <header>titlewidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="dyprosium.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnAddOption</sender>
+   <signal>clicked()</signal>
+   <receiver>btnAdd</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>203</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>393</x>
+     <y>45</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

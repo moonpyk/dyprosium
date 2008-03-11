@@ -1,0 +1,552 @@
+<ui version="4.0" >
+ <class>FrmMain</class>
+ <widget class="QMainWindow" name="FrmMain" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>835</width>
+    <height>581</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dyprosium</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="dyprosium.qrc" >:/logo/Resources/IconeDypro.png</iconset>
+  </property>
+  <property name="iconSize" >
+   <size>
+    <width>16</width>
+    <height>16</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="centralWidget" >
+   <layout class="QHBoxLayout" >
+    <property name="leftMargin" >
+     <number>6</number>
+    </property>
+    <property name="bottomMargin" >
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QStackedWidget" name="controlsStack" >
+      <property name="currentIndex" >
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="pageIntro" >
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QLabel" name="lblNothingToEdit" >
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="pixmap" >
+           <pixmap resource="dyprosium.qrc" >:/logo/Resources/Dypro.png</pixmap>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageRoot" />
+      <widget class="QWidget" name="pageSubnet" >
+       <layout class="QHBoxLayout" >
+        <item>
+         <widget class="QLabel" name="lblPageSubnet" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
+          <property name="text" >
+           <string>PAGE SUBNET</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageExclusions" />
+      <widget class="ReservationsView" name="pageReservationsView" />
+      <widget class="OptionsView" name="pageOptionsView" />
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>835</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuHelp" >
+    <property name="title" >
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout" />
+   </widget>
+   <widget class="QMenu" name="menuAction" >
+    <property name="title" >
+     <string>Action</string>
+    </property>
+    <addaction name="actionNavigateLeft" />
+    <addaction name="actionNavigateRight" />
+    <addaction name="actionAddSubnet" />
+    <addaction name="actionRemoveSubnet" />
+    <addaction name="actionAddReservation" />
+    <addaction name="actionAddOption" />
+    <addaction name="actionAddExclusion" />
+    <addaction name="actionAdd" />
+    <addaction name="actionDelete" />
+    <addaction name="actionEdit" />
+   </widget>
+   <widget class="QMenu" name="menuFile" >
+    <property name="title" >
+     <string>File</string>
+    </property>
+    <addaction name="actionNew" />
+    <addaction name="actionOpen" />
+    <addaction name="actionSave" />
+    <addaction name="actionExport" />
+    <addaction name="actionCloseConfiguration" />
+    <addaction name="separator" />
+    <addaction name="actionOptions" />
+    <addaction name="separator" />
+    <addaction name="actionExit" />
+   </widget>
+   <widget class="QMenu" name="menuWindow" >
+    <property name="title" >
+     <string>Window</string>
+    </property>
+    <addaction name="actionToggleSidebar" />
+    <addaction name="separator" />
+    <addaction name="actionReduce" />
+    <addaction name="actionMaximize" />
+   </widget>
+   <addaction name="menuFile" />
+   <addaction name="menuAction" />
+   <addaction name="menuWindow" />
+   <addaction name="menuHelp" />
+  </widget>
+  <widget class="QToolBar" name="mainToolBar" >
+   <property name="windowTitle" >
+    <string>YADDConf Beta - &lt;Configuration Name></string>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew" />
+   <addaction name="actionOpen" />
+   <addaction name="actionSave" />
+   <addaction name="actionExport" />
+   <addaction name="actionCloseConfiguration" />
+   <addaction name="separator" />
+   <addaction name="actionNavigateLeft" />
+   <addaction name="actionNavigateRight" />
+   <addaction name="separator" />
+   <addaction name="actionToggleSidebar" />
+   <addaction name="actionAddSubnet" />
+   <addaction name="actionRemoveSubnet" />
+   <addaction name="actionAddReservation" />
+   <addaction name="actionAddOption" />
+   <addaction name="actionAddExclusion" />
+   <addaction name="actionAdd" />
+   <addaction name="actionDelete" />
+   <addaction name="actionEdit" />
+  </widget>
+  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QDockWidget" name="sideBarDock" >
+   <property name="toolTip" >
+    <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Sidebar&lt;/p>&lt;/body>&lt;/html></string>
+   </property>
+   <property name="features" >
+    <set>QDockWidget::NoDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas" >
+    <set>Qt::LeftDockWidgetArea</set>
+   </property>
+   <property name="windowTitle" >
+    <string>Sidebar</string>
+   </property>
+   <attribute name="dockWidgetArea" >
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents" >
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>0</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="sideBarTree" >
+       <property name="alternatingRowColors" >
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text" >
+         <string>Configurations</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionOptions" >
+   <property name="text" >
+    <string>Options</string>
+   </property>
+  </action>
+  <action name="actionExit" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/door_in.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Exit</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionAbout" >
+   <property name="text" >
+    <string>About Dyprosium..</string>
+   </property>
+   <property name="iconText" >
+    <string>About Dyprosium</string>
+   </property>
+   <property name="toolTip" >
+    <string>About Dyprosium</string>
+   </property>
+  </action>
+  <action name="actionExport" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_go.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Export configuration...</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionOpen" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/folder.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Open configuration...</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/disk.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Save configuration...</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionNew" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_star.png</iconset>
+   </property>
+   <property name="text" >
+    <string>New configuration...</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionToggleSidebar" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/application_side_tree.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Toggle Sidebar</string>
+   </property>
+  </action>
+  <action name="actionAddSubnet" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/world_add.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Add subnet</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionAddReservation" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/computer_add.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Add reservation</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionAddOption" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/wrench_add.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Add option</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionAdd" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Add</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl++</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionDelete" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Delete</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+-</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionNavigateLeft" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_left.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Navigate left</string>
+   </property>
+   <property name="shortcut" >
+    <string>Left</string>
+   </property>
+  </action>
+  <action name="actionNavigateRight" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_right.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Navigate right</string>
+   </property>
+   <property name="shortcut" >
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionAddExclusion" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/error_add.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Add exclusion</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionCloseConfiguration" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_delete.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Close configuration</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+X</string>
+   </property>
+  </action>
+  <action name="actionEdit" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/pencil.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Edit</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+/</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionRemoveSubnet" >
+   <property name="icon" >
+    <iconset resource="dyprosium.qrc" >:/images/Resources/world_delete.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Remove Subnet</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionReduce" >
+   <property name="text" >
+    <string>Reduce</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+M</string>
+   </property>
+  </action>
+  <action name="actionMaximize" >
+   <property name="text" >
+    <string>Maximize</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+M</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>OptionsView</class>
+   <extends>QWidget</extends>
+   <header>optionsview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ReservationsView</class>
+   <extends>QWidget</extends>
+   <header>reservationsview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="dyprosium.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionToggleSidebar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sideBarDock</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>104</x>
+     <y>307</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>activated()</signal>
+   <receiver>FrmMain</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>449</x>
+     <y>401</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionReduce</sender>
+   <signal>activated()</signal>
+   <receiver>FrmMain</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>378</x>
+     <y>369</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMaximize</sender>
+   <signal>activated()</signal>
+   <receiver>FrmMain</receiver>
+   <slot>showMaximized()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>378</x>
+     <y>369</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

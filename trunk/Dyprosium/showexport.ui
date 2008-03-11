@@ -1,0 +1,48 @@
+<ui version="4.0" >
+ <class>ShowExport</class>
+ <widget class="QDialog" name="ShowExport" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>624</width>
+    <height>452</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Exportation</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QTextBrowser" name="textBrowser" />
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ShowExport</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>564</x>
+     <y>429</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>476</x>
+     <y>447</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
