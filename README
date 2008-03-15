@@ -1,0 +1,31 @@
+To compile Dyprosium basically with default spec :
+--------------------------------------------------
+
+cd src
+qmake
+
+make
+-or, if you're using VS utils :
+nmake
+
+To edit Dyprosium as a Visual Studio project :
+--------------------------------------------------
+
+cd src
+qmake -t vcapp
+
+Then open generated "Dyprosium.vcproj"
+
+To edit Dyprosium as a XCode projet on mac :
+--------------------------------------------------
+
+cd src
+qmake -spec macx-g++
+
+--------------------------------------------------
+--------------------------------------------------
+
+Dyprosium executable (or bundle on Mac OSX) is compiled under a "bin" directory.
+
+
+
