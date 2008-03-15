@@ -9,7 +9,7 @@ SubnetRange::SubnetRange(QWidget *parent) : QWizardPage(parent), _isComplete(fal
 
 	registerField(SN_WIZ_FIELD_FIRST_IP_ADDRESS, ui.lineFirstAddress);
 	registerField(SN_WIZ_FIELD_LAST_IP_ADDRESS, ui.lineLastAddress);
-	registerField(SN_WIZ_FILED_MASK_IP_ADDRESS, ui.lineMask);
+	registerField(SN_WIZ_FIELD_MASK_IP_ADDRESS, ui.lineMask);
 	registerField(SN_WIZ_FILED_NETWORK_IP_ADDRESS, ui.lineNetworkAddress);
 	
 	QObject::connect(ui.lineFirstAddress, SIGNAL(textChanged(QString)), this, SLOT(addresses_textChanged(QString)));

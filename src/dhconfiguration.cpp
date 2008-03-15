@@ -20,7 +20,7 @@ DHConfiguration::~DHConfiguration() {
 		delete subNetwork;
 	}
 
-	delete _globalConfigurationWidget;
+	delete _globalOptionsItemWidget;
 	delete _rootItemWidget;
 }
 
@@ -36,6 +36,10 @@ void DHConfiguration::setFileName(QString val) {
 
 QTreeWidgetItem * DHConfiguration::rootItemWidget() {
 	return _rootItemWidget;
+}
+
+QTreeWidgetItem * DHConfiguration::globalOptionsItemWidget() {
+	return _globalOptionsItemWidget;
 }
 
 QList<DHSubNetwork *> DHConfiguration::subNetworks() {
@@ -128,8 +132,8 @@ void DHConfiguration::_initializeTreeWidgetItems() {
 	_rootItemWidget->setItemRole(TREE_ROLE_ROOT);
 	_rootItemWidget->setDataPtr(this);
 
-	_globalConfigurationWidget = new QTreeWidgetItem(_rootItemWidget);
-	_globalConfigurationWidget->setText(0, tr("Global options"));
-	_globalConfigurationWidget->setIcon(0, QIcon(":/images/Resources/wrench_orange.png"));
-	_globalConfigurationWidget->setItemRole(TREE_ROLE_GLOBAL_OPTIONS);
+	_globalOptionsItemWidget = new QTreeWidgetItem(_rootItemWidget);
+	_globalOptionsItemWidget->setText(0, tr("Global options"));
+	_globalOptionsItemWidget->setIcon(0, QIcon(":/images/Resources/wrench_orange.png"));
+	_globalOptionsItemWidget->setItemRole(TREE_ROLE_GLOBAL_OPTIONS);
 }

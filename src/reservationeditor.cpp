@@ -7,7 +7,7 @@
 
 // CTor
 
-ReservationEditor::ReservationEditor(QWidget *parent /*= 0*/, DHSubNetworkReservation * reservation /*= NULL*/)
+ReservationEditor::ReservationEditor(DHSubNetworkReservation * reservation, QWidget *parent /*= 0*/)
 	: QWidget(parent) {
 	ui.setupUi(this);
 

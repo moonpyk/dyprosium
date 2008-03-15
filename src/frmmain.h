@@ -87,6 +87,7 @@ private:
 
 	void _resetViewMode();
 
+	void _setViewModeToSubNetwork();
 	void _setViewModeToOptions(ConfigurationMode mode, QString titleArgs = QString());
 	void _setViewModeToSubnetReservations();
 
@@ -95,6 +96,8 @@ private:
 	void _appendConfigurationTreeItem (DHConfiguration * configuration);
 
 private slots:
+	void on_actionAddOption_triggered();
+	void on_actionAddReservation_triggered();
 	void _simpleActionButtonEnabledChanged();
 	
 	void on_actionEdit_triggered();

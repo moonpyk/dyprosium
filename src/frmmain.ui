@@ -169,9 +169,9 @@
   <widget class="QStatusBar" name="statusBar" />
   <widget class="QDockWidget" name="sideBarDock" >
    <property name="toolTip" >
-    <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">
+    <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">&#xd;
+p, li { white-space: pre-wrap; }&#xd;
+&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">&#xd;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Sidebar&lt;/p>&lt;/body>&lt;/html></string>
    </property>
    <property name="features" >
@@ -181,7 +181,7 @@ p, li { white-space: pre-wrap; }
     <set>Qt::LeftDockWidgetArea</set>
    </property>
    <property name="windowTitle" >
-    <string>Sidebar</string>
+    <string>Configurations</string>
    </property>
    <attribute name="dockWidgetArea" >
     <number>1</number>

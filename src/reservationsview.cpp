@@ -21,7 +21,11 @@ ReservationViewLine::~ReservationViewLine() {
 }
 
 int ReservationViewLine::row() {
-	return nameItem->row();
+	if(nameItem) {
+		return nameItem->row();
+	}
+
+	return -1;
 }
 
 bool ReservationViewLine::belongsTo(QTableWidget * widget) {
@@ -36,9 +40,9 @@ void ReservationViewLine::removeLine() {
 	QTableWidget * widget = nameItem->tableWidget();
 
 	if(widget) {
-		int itemRow = row();
+		int itemRowId = row();
 
-		widget->removeRow(itemRow);
+		widget->removeRow(itemRowId);
 
 		nameItem		= NULL;
 		ipAddressItem	= NULL;
@@ -156,27 +160,60 @@ void ReservationsView::setCurrentDHSubNetwork(DHSubNetwork * val) {
 // Public slots
 
 void ReservationsView::add() {
-	emit valuesChanged();
+	DHSubNetworkReservation * newReservation = new DHSubNetworkReservation();
+	
+	ReservationEditor * editor		= new ReservationEditor(newReservation);
+	QDialog * editionDialog			= editor->createDialog(this);
+
+	if(editionDialog->exec() == QDialog::Accepted) {
+		editor->saveFields();
+
+		_currentDHSubNetwork->addSubNetworkReservation(newReservation);
+
+		_appendReservationToTable(newReservation);
+
+		emit valuesChanged();
+
+	} else {
+		delete newReservation;
+	}
 }
 
 void ReservationsView::remove() {
-	emit valuesChanged();
-}
+	ReservationViewLine * line = this->currentLine();
 
-void ReservationsView::edit() {
-	DHSubNetworkReservation * currentReservation = this->currentReservation();
+	if(line) {
+		DHSubNetworkReservation * currentReservation = line->reservation;
 
-	ReservationEditor * editor	= new ReservationEditor(NULL, currentReservation);
-	QDialog * editionDialog = editor->createDialog(this);
+		//TODO : Confirmation
 
-	if (editionDialog->exec() == QDialog::Accepted) {
-
-		editor->saveFields();
+		_currentDHSubNetwork->removeSubNetworkReservation(currentReservation);
+		line->removeLine();
+		_reservationLines.removeAll(line);
 
 		emit valuesChanged();
 	}
+}
 
-	editionDialog->deleteLater();
+void ReservationsView::edit() {
+	ReservationViewLine * line = this->currentLine();
+
+	if(line) {
+		DHSubNetworkReservation * currentReservation = line->reservation;
+
+		ReservationEditor * editor		= new ReservationEditor(currentReservation);
+		QDialog * editionDialog			= editor->createDialog(this);
+
+		if (editionDialog->exec() == QDialog::Accepted) {
+			editor->saveFields();
+
+			line->reflectChanges();
+
+			emit valuesChanged();
+		}
+
+		editionDialog->deleteLater();
+	}
 }
 
 // Public methods
@@ -229,12 +266,16 @@ void ReservationsView::_connectSignals() {
 
 void ReservationsView::_populateItems() {
 	foreach(DHSubNetworkReservation * reservation, _currentDHSubNetwork->reservations()) {
-		ReservationViewLine * line = new ReservationViewLine(reservation);
-		
-		line->addLineTo(ui.tableReservations);
-
-		_reservationLines.append(line);
+		_appendReservationToTable(reservation);
 	}
+}
+
+void ReservationsView::_appendReservationToTable(DHSubNetworkReservation * reservation) {
+	ReservationViewLine * line = new ReservationViewLine(reservation);
+
+	line->addLineTo(ui.tableReservations);
+
+	_reservationLines.append(line);
 }
 
 void ReservationsView::_removeAll() {

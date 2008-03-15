@@ -112,6 +112,14 @@ void FrmMain::navigateRight() {
 	}
 }
 
+/**
+* This function is executed when user selects a new QTreeWidgetItem in the sidebar.
+* It shows right configuration page, configures editor
+*
+* @param currentItem the newly selected item of the sideBar
+*
+* @see on_sideBarTree_currentItemChanged
+*/
 void FrmMain::selectConfigurationMode(QTreeWidgetItem * currentItem) {
 	_resetCurrentConfigurationHelpers();
 
@@ -119,6 +127,11 @@ void FrmMain::selectConfigurationMode(QTreeWidgetItem * currentItem) {
 	_hideAllToggleActions();
 
 	if(currentItem) {
+		if(currentItem != ui.sideBarTree->currentItem()) {
+			ui.sideBarTree->setCurrentItem(currentItem, 0);
+			return;
+		}
+
 		ui.actionNavigateLeft->setEnabled(ui.sideBarTree->itemAbove(currentItem));
 		ui.actionNavigateRight->setEnabled(ui.sideBarTree->itemBelow(currentItem));
 
@@ -133,24 +146,14 @@ void FrmMain::selectConfigurationMode(QTreeWidgetItem * currentItem) {
 
 			_setActionsSeparatorsVisible(true);
 			ui.actionAddSubnet->setVisible(true);
+			ui.actionAddOption->setVisible(true);
 
 			ui.controlsStack->setCurrentIndex(FRMMAIN_PAGE_ROOT);
 			break;
 
 		case TREE_ROLE_SUBNET:
 			_setCurrentSubNetwork (currentItem->getSubNetwork());
-			_setActionsSeparatorsVisible(true);
-
-			ui.actionAddSubnet->setVisible(true);
-			ui.actionRemoveSubnet->setVisible(true);
-			ui.actionAddReservation->setVisible(true);
-			ui.actionAddOption->setVisible(true);
-
-#ifdef SUBNET_EXCLUSIONS_SUPPORT
-			ui.actionAddExclusion->setVisible(true);
-#endif
-
-			ui.controlsStack->setCurrentIndex(FRMMAIN_PAGE_SUBNET);
+			_setViewModeToSubNetwork();
 
 			break;
 
@@ -230,6 +233,14 @@ void FrmMain::_setCurrentSubNetworkReservation(DHSubNetworkReservation * val) {
 	}
 }
 
+/**
+* This function sets new main window title depending on currently selected QTreeWidgetItem.
+*
+* @param currentItem newly selected QTreeWidgetItem
+*
+* @remarks <TODO: insert remarks here>
+* @see selectConfigurationMode
+*/
 void FrmMain::_setWindowTitle(QTreeWidgetItem* currentItem) {
 	if(currentItem && _currentDHConfiguration) {
 		if(_currentMode == ConfigurationRoot) {
@@ -253,6 +264,11 @@ void FrmMain::_setWindowTitle(QTreeWidgetItem* currentItem) {
 
 // Private methods
 
+/**
+* This function resets editors state between modes changes
+*
+* @see selectConfigurationMode
+*/
 void FrmMain::_resetCurrentConfigurationHelpers() {
 	_currentMode					= Intro;
 	_currentSimpleActionsClient		= NULL;
@@ -263,6 +279,12 @@ void FrmMain::_resetCurrentConfigurationHelpers() {
 	_setCurrentConfiguration(NULL);
 }
 
+/**
+* This function creates separators between toggling elements
+*
+* @remarks <TODO: insert remarks here>
+* @see <TODO: insert text here>
+*/
 void FrmMain::_initializeSeparators () {
 	_toolbarActionsSeparator = ui.mainToolBar->insertSeparator(ui.actionAddSubnet);
 	_toolbarActionsSeparator->setVisible(false);
@@ -277,11 +299,17 @@ void FrmMain::_initializeSeparators () {
 	_menuSimpleActionsSeparator->setVisible(false);
 }
 
+/**
+* This functions initializes all edition controls events
+*/
 void FrmMain::_initializeEditionControlsEvents () {
 	QObject::connect(ui.pageOptionsView, SIGNAL(simpleActionButtonsEnabledChanged()), this, SLOT(_simpleActionButtonEnabledChanged()));
 	QObject::connect(ui.pageReservationsView, SIGNAL(simpleActionButtonsEnabledChanged()), this, SLOT(_simpleActionButtonEnabledChanged()));
 }
 
+/**
+* This function hides all actions buttons of the menus and toobars plus their separators
+*/
 void FrmMain::_hideAllToggleActions () {
 	_setActionsSeparatorsVisible(false);
 
@@ -338,6 +366,23 @@ void FrmMain::_resetViewMode() {
 	_currentSimpleActionsClient		= NULL;
 }
 
+void FrmMain::_setViewModeToSubNetwork() {
+	_setActionsSeparatorsVisible(true);
+
+	_currentMode = SubnetRoot;
+
+	ui.actionAddSubnet->setVisible(true);
+	ui.actionRemoveSubnet->setVisible(true);
+	ui.actionAddReservation->setVisible(true);
+	ui.actionAddOption->setVisible(true);
+
+#ifdef SUBNET_EXCLUSIONS_SUPPORT
+	ui.actionAddExclusion->setVisible(true);
+#endif
+
+	ui.controlsStack->setCurrentIndex(FRMMAIN_PAGE_SUBNET);
+}
+
 void FrmMain::_setViewModeToOptions(ConfigurationMode mode, QString titleArgs /*= QString()*/) {
 	_currentMode = mode;
 
@@ -383,6 +428,8 @@ void FrmMain::_setViewModeToSubnetReservations() {
 	_setSimpleActionsVisible(true);
 	_setSimpleActionsEnabled(ui.pageReservationsView);
 
+	_currentSimpleActionsClient = ui.pageReservationsView;
+
 	ui.controlsStack->setCurrentIndex(FRMMAIN_PAGE_RESERVATIONS);
 }
 
@@ -411,9 +458,12 @@ void FrmMain::_simpleActionButtonEnabledChanged () {
 	switch(_currentMode) {
 		case ConfigurationGlobalOptions:
 		case SubnetOptions:
-		case SubnetReservations:
 		case SubnetReservationOptions:
 			_setSimpleActionsEnabled(ui.pageOptionsView);
+			break;
+
+		case SubnetReservations:
+			_setSimpleActionsEnabled(ui.pageReservationsView);
 			break;
 
 		default:
@@ -433,6 +483,7 @@ void FrmMain::on_actionSave_triggered () {
 
 }
 
+
 void FrmMain::on_actionAddSubnet_triggered() {
 	QWizard * wizard = WizardCreator::subnetWizard(this);
 
@@ -442,7 +493,7 @@ void FrmMain::on_actionAddSubnet_triggered() {
 
 		QString firstIp				= wizard->field(SN_WIZ_FIELD_FIRST_IP_ADDRESS).toString();
 		QString lastIp				= wizard->field(SN_WIZ_FIELD_LAST_IP_ADDRESS).toString();
-		QString mask				= wizard->field(SN_WIZ_FILED_MASK_IP_ADDRESS).toString();
+		QString mask				= wizard->field(SN_WIZ_FIELD_MASK_IP_ADDRESS).toString();
 		QString networkAdress		= wizard->field(SN_WIZ_FILED_NETWORK_IP_ADDRESS).toString();
 
 		QString leaseTime			= wizard->field(SN_WIZ_FIELD_LEASE_TIME).toString();
@@ -522,6 +573,10 @@ void FrmMain::on_actionRemoveSubnet_triggered() {
 	}
 }
 
+/**
+* This slot is executed when user changes the values-set in the pageOptionsView.
+* This binds options value to the right DH configuration class.
+*/
 void FrmMain::on_pageOptionsView_valuesChanged() {
 	QList<DHOptionDuet> * list = NULL;
 
@@ -552,5 +607,34 @@ void FrmMain::on_pageOptionsView_valuesChanged() {
 		list->clear();
 
 		*list << ui.pageOptionsView->optionsList();
+	}
+}
+
+void FrmMain::on_actionAddReservation_triggered() {
+	selectConfigurationMode(
+		_currentDHSubNetwork->subnetReservationsItemWidget()
+	);
+	
+	if(_currentSimpleActionsClient) {
+		_currentSimpleActionsClient->add();
+	}
+}
+
+void FrmMain::on_actionAddOption_triggered() {
+	if(_currentMode == SubnetRoot) {
+		selectConfigurationMode(
+			_currentDHSubNetwork->subnetOptionsItemWidget()
+			);
+
+		if(_currentSimpleActionsClient) {
+			_currentSimpleActionsClient->add();
+		}
+
+	} else if (_currentMode == ConfigurationRoot) {
+		selectConfigurationMode(_currentDHConfiguration->globalOptionsItemWidget());
+
+		if(_currentSimpleActionsClient) {
+			_currentSimpleActionsClient->add();
+		}
 	}
 }

@@ -15,7 +15,7 @@ class ReservationEditor : public QWidget {
 	Q_OBJECT
 
 public:
-	ReservationEditor(QWidget *parent = 0, DHSubNetworkReservation * reservation = NULL);
+	ReservationEditor(DHSubNetworkReservation * reservation, QWidget *parent = 0);
 	~ReservationEditor();
 
 signals:

@@ -52,6 +52,18 @@ void DHSubNetworkExclusion::flushConfiguration (QXmlStreamWriter * stream) {
 
 // -- DHSubNetworkReservation
 
+DHSubNetworkReservation::DHSubNetworkReservation() {
+	_treeWidgetItem = NULL;
+
+	setName("");
+
+	this->_address		= "";
+	this->_macAddress	= "";
+	this->_activated	= "";
+
+	_initializeTreeWidgetItem();
+}
+
 DHSubNetworkReservation::DHSubNetworkReservation(QString name, QString address, QString macAddress, bool activated /*= true*/) {
 	_treeWidgetItem = NULL;
 
@@ -269,8 +281,8 @@ bool DHSubNetwork::removeSubNetworkReservation (DHSubNetworkReservation * reserv
 	if(_reservations.contains(reservation)) {
 		QTreeWidgetItem * widget = reservation->treeWidgetItem();
 
-		if(widget->parent() == _subnetItemWidget) {
-			_subnetItemWidget->removeChild(widget);
+		if(widget->parent() == _subnetReservationsItemWidget) {
+			_subnetReservationsItemWidget->removeChild(widget);
 		}
 
 		return _reservations.removeAll(reservation);
@@ -330,6 +342,14 @@ QTreeWidgetItem * DHSubNetwork::subnetItemWidget() {
 	return _subnetItemWidget;
 }
 
+QTreeWidgetItem * DHSubNetwork::subnetOptionsItemWidget() {
+	return _subnetOptionsItemWidget;
+}
+
+QTreeWidgetItem * DHSubNetwork::subnetReservationsItemWidget() {
+	return _subnetReservationsItemWidget;
+}
+
 void DHSubNetwork::_initializeTreeWidgetItems(QString networkAddressString, QString name) {
 	_subnetItemWidget = new QTreeWidgetItem(QStringList());
 	_subnetItemWidget->setText(0, tr("Range [%1] %2").arg(networkAddressString).arg(name));
@@ -356,3 +376,4 @@ void DHSubNetwork::_initializeTreeWidgetItems(QString networkAddressString, QStr
 	_subnetOptionsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_wrench.png"));
 	_subnetOptionsItemWidget->setItemRole(TREE_ROLE_SUBNET_OPTIONS);
 }
+

@@ -27,6 +27,7 @@ public:
 	void setFileName(QString val);
 
 	QTreeWidgetItem * rootItemWidget();
+	QTreeWidgetItem * globalOptionsItemWidget();
 
 	QList<DHSubNetwork *> subNetworks();
 
@@ -48,7 +49,7 @@ private:
 
 	QTreeWidgetItem * _rootItemWidget;
 
-	QTreeWidgetItem * _globalConfigurationWidget;
+	QTreeWidgetItem * _globalOptionsItemWidget;
 
 	QList<DHSubNetwork *> _subNetworks;
 	QList<DHOptionDuet> _options;

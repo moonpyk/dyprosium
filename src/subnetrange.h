@@ -3,7 +3,7 @@
 
 #define SN_WIZ_FIELD_FIRST_IP_ADDRESS "firstIpAddress"
 #define SN_WIZ_FIELD_LAST_IP_ADDRESS "lastIpAddress"
-#define SN_WIZ_FILED_MASK_IP_ADDRESS "maskIpAddress"
+#define SN_WIZ_FIELD_MASK_IP_ADDRESS "maskIpAddress"
 #define SN_WIZ_FILED_NETWORK_IP_ADDRESS "networkIpAddress"
 
 #include <QWizardPage>

@@ -51,6 +51,7 @@ class DHSubNetworkReservation : public DHConfigurationBase {
 	Q_OBJECT
 
 public:
+	DHSubNetworkReservation();
 	DHSubNetworkReservation(QString name, QString address, QString macAddress, bool activated = true);
 	~DHSubNetworkReservation();
 
@@ -142,6 +143,8 @@ public:
 	QList<DHSubNetworkReservation *> reservations() const;
 
 	QTreeWidgetItem * subnetItemWidget();
+	QTreeWidgetItem * subnetOptionsItemWidget();
+	QTreeWidgetItem * subnetReservationsItemWidget();
 
 	inline DHConfiguration * parentConfiguration() { return qobject_cast<DHConfiguration *>(parent()); }
 

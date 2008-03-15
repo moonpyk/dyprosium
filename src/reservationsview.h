@@ -86,6 +86,8 @@ public slots:
 
 private:
 	void _populateItems();
+	void _appendReservationToTable(DHSubNetworkReservation * reservation);
+	
 	void _connectSignals();
 
 	void _removeAll();
