@@ -64,14 +64,15 @@ DHSubNetworkReservation::DHSubNetworkReservation() {
 	_initializeTreeWidgetItem();
 }
 
-DHSubNetworkReservation::DHSubNetworkReservation(QString name, QString address, QString macAddress, bool activated /*= true*/) {
+DHSubNetworkReservation::DHSubNetworkReservation(QString name, QString address, QString macAddress, QString macType, bool activated /*= true*/) {
 	_treeWidgetItem = NULL;
 
 	setName(name);
 
-	this->_address		= address;
-	this->_macAddress	= macAddress;
-	this->_activated	= activated;
+	this->_address			= address;
+	this->_macAddress		= macAddress;
+	this->_macAddressType	= macType;
+	this->_activated		= activated;
 
 	_initializeTreeWidgetItem();
 }

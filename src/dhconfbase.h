@@ -6,6 +6,8 @@
 
 #include "dhenums.h"
 
+#define DYPROSIUM_FILE_VERSION "Beta"
+
 struct DHOptionDuet {
 	DHOptionDuet();
 	DHOptionDuet(DHOptionType type, QString value);

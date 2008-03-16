@@ -12,6 +12,8 @@
 
 #include "titlewidget.h"
 
+#include "configurationreader.h"
+
 // CTor
 
 FrmMain::FrmMain(QWidget *parent, Qt::WFlags flags): QMainWindow(parent, flags) {
@@ -38,6 +40,9 @@ FrmMain::FrmMain(QWidget *parent, Qt::WFlags flags): QMainWindow(parent, flags) 
 #ifdef Q_WS_MAC
 	this->setWindowIcon(QIcon());
 #endif
+
+	ConfigurationReader reader;
+	reader.test();
 }
 
 FrmMain::~FrmMain() { }
@@ -51,10 +56,10 @@ void FrmMain::test () {
 		= new DHSubNetwork("Test", "192.168.1.0", "255.255.255.0", "192.168.1.1", "192.168.1.99");
 
 	DHSubNetworkReservation * reservation = 
-		new DHSubNetworkReservation("Test", "192.168.1.1", "00:00:00:00:00:01", true);
+		new DHSubNetworkReservation("Test", "192.168.1.1", "00:00:00:00:00:01", "ethernet", true);
 
 	DHSubNetworkReservation * reservationtwo = 
-		new DHSubNetworkReservation("Test", "192.168.1.2", "00:FF:00:00:00:02", true);
+		new DHSubNetworkReservation("Test", "192.168.1.2", "00:FF:00:00:00:02", "ethernet", true);
 
 	subnet->addSubNetworkReservation(reservation);
 	subnet->addSubNetworkReservation(reservationtwo);
@@ -237,9 +242,6 @@ void FrmMain::_setCurrentSubNetworkReservation(DHSubNetworkReservation * val) {
 * This function sets new main window title depending on currently selected QTreeWidgetItem.
 *
 * @param currentItem newly selected QTreeWidgetItem
-*
-* @remarks <TODO: insert remarks here>
-* @see selectConfigurationMode
 */
 void FrmMain::_setWindowTitle(QTreeWidgetItem* currentItem) {
 	if(currentItem && _currentDHConfiguration) {
@@ -300,7 +302,7 @@ void FrmMain::_initializeSeparators () {
 }
 
 /**
-* This functions initializes all edition controls events
+* This function initializes all edition controls events
 */
 void FrmMain::_initializeEditionControlsEvents () {
 	QObject::connect(ui.pageOptionsView, SIGNAL(simpleActionButtonsEnabledChanged()), this, SLOT(_simpleActionButtonEnabledChanged()));
@@ -323,12 +325,22 @@ void FrmMain::_hideAllToggleActions () {
 	_setSimpleActionsEnabled(false);
 }
 
+/**
+* This function enables files actions (New, open...)
+*
+* @param value boolean value
+*/
 void FrmMain::_setFileActionsEnabled(bool value) {
 	ui.actionSave->setEnabled(value);
 	ui.actionExport->setEnabled(value);
 	ui.actionCloseConfiguration->setEnabled(value);
 }
 
+/**
+* This function make visible simple actions (Add, Remove, Edit)
+*
+* @param value boolean value
+*/
 void FrmMain::_setSimpleActionsVisible (bool value) {
 	_setSimpleActionsSeparatorsVisible(value);
 
@@ -337,6 +349,11 @@ void FrmMain::_setSimpleActionsVisible (bool value) {
 	ui.actionEdit->setVisible(value);
 }
 
+/**
+* This function makes enabled simple actions (Add, Remove, Edit)
+*
+* @param value boolean value
+*/
 void FrmMain::_setSimpleActionsEnabled(bool value) {
 	ui.actionAdd->setEnabled(value);
 	ui.actionDelete->setEnabled(value);

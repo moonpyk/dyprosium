@@ -28,7 +28,8 @@ HEADERS += ./addresslisteditor.h \
     ./subnetrouters.h \
     ./timeleaseeditor.h \
     ./titlewidget.h \
-    ./wizardcreator.h
+    ./wizardcreator.h \
+    ./configurationreader.h
 
 #Source files
 SOURCES += ./dhconfbase.cpp \
@@ -53,7 +54,8 @@ SOURCES += ./dhconfbase.cpp \
     ./subnetrouters.cpp \
     ./timeleaseeditor.cpp \
     ./titlewidget.cpp \
-    ./wizardcreator.cpp
+    ./wizardcreator.cpp \
+    ./configurationreader.cpp
 
 #Forms
 FORMS += ./frmmain.ui \

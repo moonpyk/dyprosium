@@ -86,11 +86,11 @@ void DHConfiguration::flushConfiguration (QXmlStreamWriter * stream) {
 	stream->writeStartDocument("1.0");
 
 	stream->writeStartElement("Dyprosium");
-	stream->writeAttribute("Version", "Beta");
+	stream->writeAttribute("Version", DYPROSIUM_FILE_VERSION);
 
 	// Global Options
 	if(_options.count() > 0) {
-		stream->writeStartElement("ServerOptions");
+		stream->writeStartElement("Options");
 
 		foreach(DHOptionDuet option, _options) {
 			option.flushConfiguration(stream);

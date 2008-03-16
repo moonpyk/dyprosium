@@ -52,7 +52,7 @@ class DHSubNetworkReservation : public DHConfigurationBase {
 
 public:
 	DHSubNetworkReservation();
-	DHSubNetworkReservation(QString name, QString address, QString macAddress, bool activated = true);
+	DHSubNetworkReservation(QString name, QString address, QString macAddress, QString macType, bool activated = true);
 	~DHSubNetworkReservation();
 
 public:
