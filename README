@@ -16,16 +16,19 @@ qmake -t vcapp
 
 Then open generated "Dyprosium.vcproj"
 
-To edit Dyprosium as a XCode projet on mac :
+To edit Dyprosium as a XCode project on Mac OS X :
 --------------------------------------------------
 
 cd src
-qmake -spec macx-g++
+qmake -spec macx-xcode
+
+Then open generated "Dyprosium.xcodeproj"
 
 --------------------------------------------------
 --------------------------------------------------
 
-Dyprosium executable (or bundle on Mac OSX) is compiled under a "bin" directory.
+Dyprosium executable (or bundle on Mac OSX) is
+compiled under this "bin" directory at project's root.
 
 
 

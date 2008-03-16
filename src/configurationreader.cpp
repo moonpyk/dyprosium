@@ -21,7 +21,7 @@ void ConfigurationReader::test() {
 
 
 	QFile file("C:/Documents and Settings/Moonpyk/Bureau/testator.xml");
-	file.open(QFile::OpenModeFlag::ReadOnly);
+	file.open(QFile::ReadOnly);
 
 	read(&file);
 
