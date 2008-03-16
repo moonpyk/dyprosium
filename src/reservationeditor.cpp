@@ -41,7 +41,7 @@ bool ReservationEditor::fieldsValid() const {
 QDialog * ReservationEditor::createDialog(QWidget *parent /*= 0*/, Qt::WindowFlags f /*= 0*/) {
 	QDialog * dialog = new QDialog(parent, f);
 	//dialog->resize(335, 326);
-	dialog->setWindowTitle(tr("Dyprosium reservation editor"));
+	dialog->setWindowTitle(tr("Editeur de réservations"));
 
 	QVBoxLayout			* vboxLayout;
 	QDialogButtonBox	* buttonBox;

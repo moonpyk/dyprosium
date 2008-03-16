@@ -14,17 +14,15 @@ class DHConfiguration : public DHConfigurationBase {
 	Q_OBJECT
 
 public: 
-	DHConfiguration(QString fileName, QString name);
+	DHConfiguration(const QString& name = "");
 	~DHConfiguration();
 
 public:
-	Q_PROPERTY(QString fileName READ name WRITE setFileName);
 	Q_PROPERTY(QTreeWidgetItem* rootItemWidget READ rootItemWidget);
 	Q_PROPERTY(QList<DHSubNetwork *>  subNetworks READ subNetworks);
 	Q_PROPERTY(QList<DHOptionDuet> * options READ options);
 
-	QString fileName() const;
-	void setFileName(QString val);
+	virtual void setName(QString val);
 
 	QTreeWidgetItem * rootItemWidget();
 	QTreeWidgetItem * globalOptionsItemWidget();
@@ -39,14 +37,15 @@ public:
 	bool removeSubNetwork(DHSubNetwork * subnet);
 
 	QString xmlConfiguration();
+	void writeXmlConfiguration(QIODevice * device);
+
 	void flushConfiguration(QXmlStreamWriter * stream);
 
 private:
 	void _initializeTreeWidgetItems();
+	void _bindTreeWidgetItemName();	
 
 private:
-	QString _fileName;
-
 	QTreeWidgetItem * _rootItemWidget;
 
 	QTreeWidgetItem * _globalOptionsItemWidget;

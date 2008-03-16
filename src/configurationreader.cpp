@@ -1,11 +1,15 @@
 #include "configurationreader.h"
 
+#include "dhconfiguration.h"
+
 #include <QFile>
 
-#define CONF_ASSERT_PLUS(NAME, PLUS) Q_ASSERT(_currentConfiguration && isStartElement() && (name() == NAME) && PLUS)
+#define CONF_ASSERT_PLUS(NAME, PLUS) Q_ASSERT(_configuration && isStartElement() && (name() == NAME) && PLUS)
 #define CONF_ASSERT(NAME) CONF_ASSERT_PLUS(NAME, true)
 
 #define TOKEN_DYPROSIUM "Dyprosium"
+
+#define TOKEN_INFORMATIONS "Informations"
 
 #define TOKEN_OPTION "Option"
 #define TOKEN_OPTION_LIST "Options"
@@ -16,26 +20,10 @@
 #define TOKEN_RESERVATION "Reservation"
 #define TOKEN_RESERVATIONS_LIST "Reservations"
 
-void ConfigurationReader::test() {
-	_resetConfig();
-
-
-	QFile file("C:/Documents and Settings/Moonpyk/Bureau/testator.xml");
-	file.open(QFile::ReadOnly);
-
-	read(&file);
-
-	if(_currentConfiguration) {
-		qDebug() << _currentConfiguration->xmlConfiguration();
-	}
-
-	qDebug() << hasError() << errorString();
-}
-
-void ConfigurationReader::read(QIODevice * device) {
+DHConfiguration * ConfigurationReader::read(QIODevice * device) {
+	_parsePrepare();
+	 
 	setDevice(device);
-
-	_currentConfiguration = new DHConfiguration("","");
 
 	while(!atEnd()) {
 		readNext();
@@ -48,10 +36,35 @@ void ConfigurationReader::read(QIODevice * device) {
 				_readDyprosium();
 
 			} else {
-				raiseError(QObject::tr("The file is not a Dyprosium version %1 file").arg(DYPROSIUM_FILE_VERSION));
+				_raiseInvalidFileTypeError();
+
 			}
 		}
 	}
+
+	if(hasError()) {
+		delete _configuration;
+		
+		return NULL;
+	}
+
+	return _configuration;
+}
+
+QXmlStreamReader::Error ConfigurationReader::error() const {
+	return QXmlStreamReader::error();
+}
+
+QString ConfigurationReader::errorString() const {
+	return QXmlStreamReader::errorString();
+}
+
+qint64 ConfigurationReader::columnNumber() const {
+	return QXmlStreamReader::columnNumber();
+}
+
+qint64 ConfigurationReader::lineNumber() const {
+	return QXmlStreamReader::lineNumber();
 }
 
 // Private
@@ -70,12 +83,36 @@ void ConfigurationReader::_readDyprosium() {
 
 			} else if(name() == TOKEN_OPTION_LIST) {
 				_readGlobalOptionList();
+
+			} else if (name() == TOKEN_INFORMATIONS) {
+				_readInformationsElement();
 		
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		}
 	}
+
+	if(!_gotConfigurationInformations) {
+		raiseError(QObject::tr("No 'Informations' element was found in the _configuration."));
+	}
+
+	_parseEnd();
+}
+
+void ConfigurationReader::_readInformationsElement() {
+	CONF_ASSERT(TOKEN_INFORMATIONS);
+
+	QString name = _getAttribute("Name");
+
+	_configuration->setName(name);
+	_configuration->setDescription(_getDescriptionAttribute());
+
+	if(!name.isEmpty()) {
+		_gotConfigurationInformations = true;
+	}
+
+	readElementText();
 }
 
 void ConfigurationReader::_readSubNetworkList() {
@@ -91,7 +128,7 @@ void ConfigurationReader::_readSubNetworkList() {
 				_readSubNetwork();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		} 
 	}
@@ -119,7 +156,7 @@ void ConfigurationReader::_readSubNetwork() {
 		_currentSubNetwork->setLeaseTime(_getAttribute("LeaseTime"));
 		_currentSubNetwork->setDescription(_getDescriptionAttribute());
 
-		_currentConfiguration->addSubNetwork(_currentSubNetwork);
+		_configuration->addSubNetwork(_currentSubNetwork);
 
 	} else {
 		_raiseInvalidElementError(TOKEN_SUBNETWORK);
@@ -138,7 +175,7 @@ void ConfigurationReader::_readSubNetwork() {
 				_readSubnetOptionList();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		} 
 	}
@@ -157,7 +194,7 @@ void ConfigurationReader::_readSubNetworkReservationList() {
 				_readSubNetworkReservation();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		} 
 	}
@@ -178,8 +215,8 @@ void ConfigurationReader::_readSubNetworkReservation() {
 			_currentSubNetworkReservation = new DHSubNetworkReservation(
 				_getAttribute("Name"),
 				_getAttribute("Address"),
-				_getAttribute("MacType"),
 				_getAttribute("MacAddress"),
+				_getAttribute("MacType"),
 				activated
 			);
 
@@ -201,7 +238,7 @@ void ConfigurationReader::_readSubNetworkReservation() {
 				_readSubnetReservationOptionList();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		} 
 	}
@@ -222,7 +259,7 @@ void ConfigurationReader::_readGlobalOptionList() {
 				_readGlobalOption();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		}
 	}
@@ -241,7 +278,7 @@ void ConfigurationReader::_readSubnetOptionList() {
 				_readSubnetOption();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		}
 	}
@@ -260,7 +297,7 @@ void ConfigurationReader::_readSubnetReservationOptionList() {
 				_readSubnetReservationOption();
 
 			} else {
-				_raiseUnexpectedElementError(name());
+				_raiseUnexpectedElementError();
 			}
 		}
 	}
@@ -273,9 +310,7 @@ void ConfigurationReader::_readGlobalOption() {
 
 	DHOptionDuet ret = _readOption();
 
-	_currentConfiguration->options()->append(ret);
-
-	readElementText();
+	_configuration->options()->append(ret);
 }
 
 void ConfigurationReader::_readSubnetOption() {
@@ -284,8 +319,6 @@ void ConfigurationReader::_readSubnetOption() {
 	DHOptionDuet ret = _readOption();
 
 	_currentSubNetwork->options()->append(ret);
-
-	readElementText();
 }
 
 void ConfigurationReader::_readSubnetReservationOption() {
@@ -294,8 +327,6 @@ void ConfigurationReader::_readSubnetReservationOption() {
 	DHOptionDuet ret = _readOption();
 
 	_currentSubNetworkReservation->options()->append(ret);
-
-	readElementText();
 }
 
 DHOptionDuet ConfigurationReader::_readOption() {
@@ -311,20 +342,22 @@ DHOptionDuet ConfigurationReader::_readOption() {
 		_raiseInvalidElementError(TOKEN_OPTION);
 	}
 
+	readElementText(); // To next element
+
 	return duet;
 }
 
 // ERRORS
-void ConfigurationReader::_raiseUnexpectedElementError(QStringRef type) {
-	_raiseUnexpectedElementError(type.toString());
-}
-
-void ConfigurationReader::_raiseUnexpectedElementError(const QString &type) {
-	raiseError(QObject::tr("Unexpected element type : %1").arg(type));
+void ConfigurationReader::_raiseUnexpectedElementError() {
+	raiseError(QObject::tr("Unexpected element type : %1").arg(name().toString()));
 }
 
 void ConfigurationReader::_raiseInvalidElementError(const QString &type) {
 	raiseError(QObject::tr("Invalid %1 element").arg(type));
+}
+
+void ConfigurationReader::_raiseInvalidFileTypeError() {
+	raiseError(QObject::tr("The file is not a Dyprosium version %1 file").arg(DYPROSIUM_FILE_VERSION));
 }
 
 // UTILS
@@ -350,14 +383,22 @@ QString ConfigurationReader::_getDescriptionAttribute() {
 	if(_hasAttribute("Description")) {
 		return _getAttribute("Description");
 	}
+
+	return "";
 }
 
 bool ConfigurationReader::_hasAttribute(const QString &value) {
 	return !attributes().value(value).isNull();
 }
 
-void ConfigurationReader::_resetConfig() {
-	_currentConfiguration			= NULL;
+void ConfigurationReader::_parsePrepare() {
+	_configuration					= new DHConfiguration("");;
+	_currentSubNetwork				= NULL;
+	_currentSubNetworkReservation	= NULL;
+	_gotConfigurationInformations	= false;
+}
+
+void ConfigurationReader::_parseEnd() {
 	_currentSubNetwork				= NULL;
 	_currentSubNetworkReservation	= NULL;
 }

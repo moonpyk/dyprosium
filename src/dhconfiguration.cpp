@@ -7,10 +7,11 @@
 
 // CTor
 
-DHConfiguration::DHConfiguration(QString fileName, QString name) {
-	_fileName = fileName;
+DHConfiguration::DHConfiguration(const QString& name) {
+	_rootItemWidget				= NULL;
+	_globalOptionsItemWidget	= NULL;
 
-	setName(fileName);
+	setName(name);
 
 	_initializeTreeWidgetItems();
 }
@@ -26,12 +27,10 @@ DHConfiguration::~DHConfiguration() {
 
 // Properties
 
-QString DHConfiguration::fileName() const {
-	return _fileName;
-}
+void DHConfiguration::setName(QString val) {
+	DHConfigurationBase::setName(val);
 
-void DHConfiguration::setFileName(QString val) {
-	_fileName = val;
+	_bindTreeWidgetItemName();
 }
 
 QTreeWidgetItem * DHConfiguration::rootItemWidget() {
@@ -88,6 +87,11 @@ void DHConfiguration::flushConfiguration (QXmlStreamWriter * stream) {
 	stream->writeStartElement("Dyprosium");
 	stream->writeAttribute("Version", DYPROSIUM_FILE_VERSION);
 
+	// Informations
+	stream->writeEmptyElement("Informations");
+	stream->writeAttribute("Name", name());
+	stream->writeAttribute("Description", description());
+
 	// Global Options
 	if(_options.count() > 0) {
 		stream->writeStartElement("Options");
@@ -113,8 +117,14 @@ void DHConfiguration::flushConfiguration (QXmlStreamWriter * stream) {
 	stream->writeEndDocument();
 }
 
+void DHConfiguration::writeXmlConfiguration(QIODevice * device) {
+	QXmlStreamWriter * xmlWriter = new QXmlStreamWriter(device);
+	xmlWriter->setAutoFormatting(true);
+
+	flushConfiguration(xmlWriter);
+}
+
 QString DHConfiguration::xmlConfiguration() {
-	//QFile * file = new QFile(path, this);
 	QString outputBuffer;
 
 	QXmlStreamWriter * xmlWriter = new QXmlStreamWriter(&outputBuffer);
@@ -127,13 +137,20 @@ QString DHConfiguration::xmlConfiguration() {
 
 void DHConfiguration::_initializeTreeWidgetItems() {
 	_rootItemWidget = new QTreeWidgetItem(QStringList());
-	_rootItemWidget->setText(0, tr("Configuration %1").arg(this->name()));
 	_rootItemWidget->setIcon(0, QIcon(":/images/Resources/folder_page.png"));
 	_rootItemWidget->setItemRole(TREE_ROLE_ROOT);
 	_rootItemWidget->setDataPtr(this);
 
 	_globalOptionsItemWidget = new QTreeWidgetItem(_rootItemWidget);
-	_globalOptionsItemWidget->setText(0, tr("Global options"));
+	_globalOptionsItemWidget->setText(0, tr("Options globales"));
 	_globalOptionsItemWidget->setIcon(0, QIcon(":/images/Resources/wrench_orange.png"));
 	_globalOptionsItemWidget->setItemRole(TREE_ROLE_GLOBAL_OPTIONS);
+
+	_bindTreeWidgetItemName();
+}
+
+void DHConfiguration::_bindTreeWidgetItemName() {
+	if(_rootItemWidget) {
+		_rootItemWidget->setText(0, tr("Configuration [%1]").arg(this->name()));
+	}
 }

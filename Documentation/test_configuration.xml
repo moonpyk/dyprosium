@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Dyprosium Version="Beta">
+    <Informations Name="Masterplop" Description=""/>
+    <Options>
+        <Option Type="57" Value="98897987987"/>
+    </Options>
+    <SubNetworks>
+        <SubNetwork Name="Test" Description="" NetworkAddress="192.168.1.0" Mask="255.255.255.0" StartAddress="192.168.1.1" EndAddress="192.168.1.99" LeaseTime="">
+            <Reservations>
+                <Reservation Name="Test" Description="" Address="192.168.1.1" MacType="ethernet" MacAddress="00:00:00:00:00:01" Activated="1">
+                    <Options>
+                        <Option Type="62" Value="Masterplops"/>
+                    </Options>
+                </Reservation>
+                <Reservation Name="TestDeux" Description="" Address="192.168.1.2" MacType="ethernet" MacAddress="00:FF:00:00:00:02" Activated="1">
+                    <Options>
+                        <Option Type="78" Value="PLOPUS"/>
+                        <Option Type="77" Value="PLOP"/>
+                    </Options>
+                </Reservation>
+            </Reservations>
+            <Options>
+                <Option Type="13" Value="6544"/>
+            </Options>
+        </SubNetwork>
+        <SubNetwork Name="Masterplop Deux" Description="" NetworkAddress="192.168.2.0" Mask="255.255.255.0" StartAddress="192.168.2.2" EndAddress="192.168.2.98" LeaseTime="691200">
+            <Reservations>
+                <Reservation Name="DNS" Description="" Address="192.168.1.65" MacType="ethernet" MacAddress="ff:ff:ff:ff:ff:ff" Activated="1">
+                    <Options>
+                        <Option Type="210" Value="Masterplop"/>
+                    </Options>
+                </Reservation>
+                <Reservation Name="Hello" Description="" Address="192.168.1.98" MacType="ethernet" MacAddress="FF:00:FF:11:F2:13" Activated="1"></Reservation>
+            </Reservations>
+            <Options>
+                <Option Type="6" Value="66.249.93.104"/>
+                <Option Type="61" Value="OOOPS"/>
+                <Option Type="3" Value="192.168.1.1"/>
+            </Options>
+        </SubNetwork>
+    </SubNetworks>
+</Dyprosium>

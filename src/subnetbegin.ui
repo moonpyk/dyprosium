@@ -18,7 +18,7 @@
      <item row="0" column="0" >
       <widget class="QLabel" name="label" >
        <property name="text" >
-        <string>Name :</string>
+        <string>Nom :</string>
        </property>
       </widget>
      </item>
@@ -26,9 +26,9 @@
       <widget class="QLineEdit" name="editName" />
      </item>
      <item row="1" column="0" >
-      <widget class="QLabel" name="label_2" >
+      <widget class="QLabel" name="lblDesc" >
        <property name="text" >
-        <string>Description :</string>
+        <string>Déscription :</string>
        </property>
       </widget>
      </item>

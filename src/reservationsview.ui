@@ -155,12 +155,12 @@
            </column>
            <column>
             <property name="text" >
-             <string>IP Address</string>
+             <string>Adresse IP</string>
             </property>
            </column>
            <column>
             <property name="text" >
-             <string>MAC Address</string>
+             <string>Adresse MAC</string>
             </property>
            </column>
           </widget>
@@ -170,7 +170,7 @@
            <item>
             <widget class="QToolButton" name="btnAdd" >
              <property name="text" >
-              <string/>
+              <string>Ajouter</string>
              </property>
              <property name="icon" >
               <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
@@ -183,7 +183,7 @@
               <bool>false</bool>
              </property>
              <property name="text" >
-              <string/>
+              <string>Supprimer</string>
              </property>
              <property name="icon" >
               <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
@@ -194,6 +194,9 @@
             <widget class="QToolButton" name="btnEdit" >
              <property name="enabled" >
               <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Editer</string>
              </property>
              <property name="icon" >
               <iconset resource="dyprosium.qrc" >:/images/Resources/pencil.png</iconset>

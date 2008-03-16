@@ -64,7 +64,7 @@
      <item row="2" column="0" colspan="2" >
       <widget class="QLabel" name="label_6" >
        <property name="text" >
-        <string>MAC Type :</string>
+        <string>Type matériel :</string>
        </property>
       </widget>
      </item>
@@ -104,7 +104,7 @@
      <item row="4" column="0" colspan="2" >
       <widget class="QLabel" name="label_5" >
        <property name="text" >
-        <string>Description :</string>
+        <string>Déscription :</string>
        </property>
       </widget>
      </item>

@@ -1,16 +1,14 @@
 #include "frmmain.h"
 
+#include <QFileDialog>
+#include <QMessageBox>
+
 #include "dhconfiguration.h"
 #include "iptools.h"
 #include "wizardcreator.h"
 
-#include "optioneditor.h"
-
 #include "showexport.h"
 
-#include "spinnerwidget.h"
-
-#include "titlewidget.h"
 
 #include "configurationreader.h"
 
@@ -40,9 +38,6 @@ FrmMain::FrmMain(QWidget *parent, Qt::WFlags flags): QMainWindow(parent, flags) 
 #ifdef Q_WS_MAC
 	this->setWindowIcon(QIcon());
 #endif
-
-	ConfigurationReader reader;
-	reader.test();
 }
 
 FrmMain::~FrmMain() { }
@@ -50,23 +45,7 @@ FrmMain::~FrmMain() { }
 // Test
 
 void FrmMain::test () {
-	DHConfiguration * configuration = new DHConfiguration("Masterplop", "");
-
-	DHSubNetwork * subnet
-		= new DHSubNetwork("Test", "192.168.1.0", "255.255.255.0", "192.168.1.1", "192.168.1.99");
-
-	DHSubNetworkReservation * reservation = 
-		new DHSubNetworkReservation("Test", "192.168.1.1", "00:00:00:00:00:01", "ethernet", true);
-
-	DHSubNetworkReservation * reservationtwo = 
-		new DHSubNetworkReservation("Test", "192.168.1.2", "00:FF:00:00:00:02", "ethernet", true);
-
-	subnet->addSubNetworkReservation(reservation);
-	subnet->addSubNetworkReservation(reservationtwo);
-
-	configuration->addSubNetwork(subnet);
-
-	_appendConfigurationTreeItem(configuration);
+	open("../Documentation/test_configuration.xml");
 }
 
 // Properties
@@ -84,6 +63,90 @@ DHSubNetworkReservation * FrmMain::currentSubNetworkReservation() const {
 }
 
 // Public slots
+
+void FrmMain::open(QString fileName /*= ""*/) {
+	if(fileName.isEmpty()) {
+		fileName =
+			QFileDialog::getOpenFileName(
+			this,
+			tr("Ouvrir une configuration..."),
+			QDir::currentPath(),
+			tr("Fichiers Dyprosium(*.xml)")
+			);
+	}
+	
+	if (fileName.isEmpty())
+		return;
+
+	QFile file(fileName);
+
+	if (!file.open(QFile::ReadOnly | QFile::Text)) {
+		QMessageBox::warning(this, tr("Dyprosium"),
+			tr("Impossible de lire le fichier %1:\n%2.")
+			.arg(fileName)
+			.arg(file.errorString()));
+
+		return;
+	}
+
+	ConfigurationReader reader;
+	DHConfiguration * configuration = reader.read(&file);
+
+	if (!configuration) {
+		QMessageBox::warning(this, tr("Dyprosium"),
+			tr("Erreur de lecture dans le fichier %1 à la ligne %2, colonne %3:\n%4")
+			.arg(fileName)
+			.arg(reader.lineNumber())
+			.arg(reader.columnNumber())
+			.arg(reader.errorString()));
+
+	} else {
+		statusBar()->showMessage(tr("File loaded"), 2000);
+	}
+
+	_appendConfigurationTreeItem(configuration);
+}
+
+void FrmMain::saveAs() {
+	if(_currentDHConfiguration) {
+		QString fileName =
+			QFileDialog::getSaveFileName(
+				this, 
+				tr("Enregistrer sous..."),
+				QDir::currentPath(),
+				tr("Fichiers Dyprosium(*.xml)")
+			);
+
+		if (fileName.isEmpty())
+			return;
+
+		QFile file(fileName);
+
+		if (!file.open(QFile::WriteOnly | QFile::Text)) {
+			QMessageBox::warning(this, tr("Dyprosium"),
+				tr("Impossible d'écrire le fichier %1:\n%2.")
+				.arg(fileName)
+				.arg(file.errorString()));
+
+			return;
+		}
+
+		_currentDHConfiguration->writeXmlConfiguration(&file);
+
+		file.flush();
+		file.close();
+	}
+}
+
+void FrmMain::closeCurrentConfiguration() {
+	if(_currentDHConfiguration) {
+		delete _currentDHConfiguration;
+
+		if(!ui.sideBarTree->currentItem()) {
+			_setCurrentConfiguration(NULL);
+		}
+	}
+}
 
 void FrmMain::navigateLeft() {
 	QTreeWidgetItem * currentItem = ui.sideBarTree->currentItem();
@@ -192,12 +255,12 @@ void FrmMain::selectConfigurationMode(QTreeWidgetItem * currentItem) {
 				infos = QString(tr("%1 [%2]")
 					.arg(reservation->name())
 					.arg(reservation->address())
-				);
+					);
 			}
 
 			_setViewModeToOptions(SubnetReservationOptions, infos);
-		  }
-		    break;
+												  }
+												  break;
 
 		case TREE_ROLE_SUBNET_OPTIONS:
 			_setCurrentSubNetwork (_getBackOnTree(currentItem)->getSubNetwork());
@@ -410,17 +473,17 @@ void FrmMain::_setViewModeToOptions(ConfigurationMode mode, QString titleArgs /*
 	switch(mode)
 	{
 	case ConfigurationGlobalOptions:
-		title = tr("Configuration global options");
+		title = tr("Options globales");
 		ui.pageOptionsView->setOptionsList(*(_currentDHConfiguration->options()));
 		break;
 
 	case SubnetOptions:
-		title = tr("Subnet options");
+		title = tr("Options de sous-réseau");
 		ui.pageOptionsView->setOptionsList(*(_currentDHSubNetwork->options()));
 		break;
 
 	case SubnetReservationOptions:
-		title = tr("Reservation options : %1").arg(titleArgs);
+		title = tr("Options de réservation : %1").arg(titleArgs);
 		ui.pageOptionsView->setOptionsList(*(_currentDHSubNetworkReservation->options()));
 		break;
 
@@ -471,35 +534,52 @@ QTreeWidgetItem * FrmMain::_getBackOnTree(QTreeWidgetItem* item, int passes /*= 
 
 // Private slots
 
-void FrmMain::_simpleActionButtonEnabledChanged () {
-	switch(_currentMode) {
-		case ConfigurationGlobalOptions:
-		case SubnetOptions:
-		case SubnetReservationOptions:
-			_setSimpleActionsEnabled(ui.pageOptionsView);
-			break;
-
-		case SubnetReservations:
-			_setSimpleActionsEnabled(ui.pageReservationsView);
-			break;
-
-		default:
-			break;
-	}
-}
-
 void FrmMain::on_actionNew_triggered() {
 	test();
 }
 
 void FrmMain::on_actionOpen_triggered() {
-
+	open();	
 }
 
 void FrmMain::on_actionSave_triggered () {
+	if(_currentDHConfiguration) {
+		saveAs();
+	}
+}
+
+void FrmMain::on_actionExport_triggered() {
+	if(_currentDHConfiguration) {
+		ShowExport::showMessage(this, _currentDHConfiguration->xmlConfiguration());
+	}
+}
+
+void FrmMain::on_actionCloseConfiguration_triggered() {
+	closeCurrentConfiguration();
 
 }
 
+void FrmMain::on_actionAdd_triggered(){
+	if(ui.actionAdd->isVisible() && _currentSimpleActionsClient) {
+		_currentSimpleActionsClient->add();
+	}
+}
+
+void FrmMain::on_actionEdit_triggered() {
+	if(ui.actionEdit->isVisible() && _currentSimpleActionsClient) {
+		_currentSimpleActionsClient->edit();
+	}
+}
+
+void FrmMain::on_actionDelete_triggered(){
+	if(ui.actionDelete->isVisible() && _currentSimpleActionsClient) {
+		_currentSimpleActionsClient->remove();
+	}
+}
+
+void FrmMain::on_sideBarTree_currentItemChanged(QTreeWidgetItem* currentItem, QTreeWidgetItem*) {
+	selectConfigurationMode(currentItem);
+}
 
 void FrmMain::on_actionAddSubnet_triggered() {
 	QWizard * wizard = WizardCreator::subnetWizard(this);
@@ -546,84 +626,9 @@ void FrmMain::on_actionAddSubnet_triggered() {
 	wizard->deleteLater();
 }
 
-void FrmMain::on_sideBarTree_currentItemChanged(QTreeWidgetItem* currentItem, QTreeWidgetItem*) {
-	selectConfigurationMode(currentItem);
-}
-
-void FrmMain::on_actionAdd_triggered(){
-	if(ui.actionAdd->isVisible() && _currentSimpleActionsClient) {
-		_currentSimpleActionsClient->add();
-	}
-}
-
-void FrmMain::on_actionDelete_triggered(){
-	if(ui.actionDelete->isVisible() && _currentSimpleActionsClient) {
-		_currentSimpleActionsClient->remove();
-	}
-}
-
-void FrmMain::on_actionEdit_triggered() {
-	if(ui.actionEdit->isVisible() && _currentSimpleActionsClient) {
-		_currentSimpleActionsClient->edit();
-	}
-}
-
-void FrmMain::on_actionExport_triggered() {
-	if(_currentDHConfiguration) {
-		ShowExport::showMessage(this, _currentDHConfiguration->xmlConfiguration());
-	}
-}
-
-void FrmMain::on_actionCloseConfiguration_triggered() {
-	if(_currentDHConfiguration) {
-		delete _currentDHConfiguration;
-
-		if(!ui.sideBarTree->currentItem()) {
-			_setCurrentConfiguration(NULL);
-		}
-	}
-}
-
 void FrmMain::on_actionRemoveSubnet_triggered() {
 	if(_currentDHConfiguration && _currentDHSubNetwork) {
 		_currentDHConfiguration->removeSubNetwork(_currentDHSubNetwork);
-	}
-}
-
-/**
-* This slot is executed when user changes the values-set in the pageOptionsView.
-* This binds options value to the right DH configuration class.
-*/
-void FrmMain::on_pageOptionsView_valuesChanged() {
-	QList<DHOptionDuet> * list = NULL;
-
-	switch(_currentMode) {
-	case ConfigurationGlobalOptions:
-		if(_currentDHConfiguration) {
-			list = _currentDHConfiguration->options();
-		}
-		break;
-
-	case SubnetOptions:
-		if(_currentDHSubNetwork) {
-			list = _currentDHSubNetwork->options();
-		}
-		
-		break;
-
-	case SubnetReservationOptions:
-		if(_currentDHSubNetworkReservation) {
-			list = _currentDHSubNetworkReservation->options();
-		}
-		break;
-
-	default: break;
-	}
-
-	if(list) {
-		list->clear();
-
-		*list << ui.pageOptionsView->optionsList();
 	}
 }
 
@@ -655,3 +660,58 @@ void FrmMain::on_actionAddOption_triggered() {
 		}
 	}
 }
+
+/**
+* This slot is executed when user changes the values-set in the pageOptionsView.
+* This binds options value to the right DH configuration class.
+*/
+void FrmMain::on_pageOptionsView_valuesChanged() {
+	QList<DHOptionDuet> * list = NULL;
+
+	switch(_currentMode) {
+	case ConfigurationGlobalOptions:
+		if(_currentDHConfiguration) {
+			list = _currentDHConfiguration->options();
+		}
+		break;
+
+	case SubnetOptions:
+		if(_currentDHSubNetwork) {
+			list = _currentDHSubNetwork->options();
+		}
+
+		break;
+
+	case SubnetReservationOptions:
+		if(_currentDHSubNetworkReservation) {
+			list = _currentDHSubNetworkReservation->options();
+		}
+		break;
+
+	default: break;
+	}
+
+	if(list) {
+		list->clear();
+
+		*list << ui.pageOptionsView->optionsList();
+	}
+}
+
+void FrmMain::_simpleActionButtonEnabledChanged () {
+	switch(_currentMode) {
+		case ConfigurationGlobalOptions:
+		case SubnetOptions:
+		case SubnetReservationOptions:
+			_setSimpleActionsEnabled(ui.pageOptionsView);
+			break;
+
+		case SubnetReservations:
+			_setSimpleActionsEnabled(ui.pageReservationsView);
+			break;
+
+		default:
+			break;
+	}
+}
+

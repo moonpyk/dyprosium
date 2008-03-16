@@ -21,7 +21,7 @@ win32:RC_FILE		= Dyprosium.rc
 
 DESTDIR = ../bin
 
-TRANSLATIONS += ./Translations/dyprosium_fr.ts
+#TRANSLATIONS += ./Translations/
 
 #Include file(s)
 include(Dyprosium.pri)

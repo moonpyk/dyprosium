@@ -3,11 +3,11 @@
 SubnetLeaseTime::SubnetLeaseTime(QWidget *parent) : QWizardPage(parent) {
 	ui.setupUi(this);
 
-	setTitle(tr("DurÈe du bail"));
+	setTitle(tr("Durée du bail"));
 
 	setSubTitle(tr(
-		"La durÈe du bail doit thÈoriquement Ítre Ègale au temps moyen durant "
-		"lequel l'ordinateur est connectÈ au mÍme rÈseau physique. "
+		"La durée du bail doit théoriquement être égale au temps moyen durant "
+		"lequel l'ordinateur est connecté au même réseau physique. "
 		));
 
 	_isComplete = false;

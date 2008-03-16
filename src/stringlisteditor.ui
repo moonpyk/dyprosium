@@ -46,6 +46,9 @@
      <property name="enabled" >
       <bool>false</bool>
      </property>
+     <property name="text" >
+      <string>Ajouter</string>
+     </property>
      <property name="icon" >
       <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
      </property>
@@ -65,7 +68,7 @@
         <bool>false</bool>
        </property>
        <property name="text" >
-        <string/>
+        <string>Supprimer</string>
        </property>
        <property name="icon" >
         <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
@@ -78,7 +81,7 @@
         <bool>false</bool>
        </property>
        <property name="text" >
-        <string/>
+        <string>Monter</string>
        </property>
        <property name="icon" >
         <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_up.png</iconset>
@@ -91,7 +94,7 @@
         <bool>false</bool>
        </property>
        <property name="text" >
-        <string/>
+        <string>Descendre</string>
        </property>
        <property name="icon" >
         <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_down.png</iconset>

@@ -85,9 +85,9 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHelp" >
+   <widget class="QMenu" name="mnHelp" >
     <property name="title" >
-     <string>Help</string>
+     <string>Aide</string>
     </property>
     <addaction name="actionAbout" />
    </widget>
@@ -108,7 +108,7 @@
    </widget>
    <widget class="QMenu" name="menuFile" >
     <property name="title" >
-     <string>File</string>
+     <string>Fichier</string>
     </property>
     <addaction name="actionNew" />
     <addaction name="actionOpen" />
@@ -122,7 +122,7 @@
    </widget>
    <widget class="QMenu" name="menuWindow" >
     <property name="title" >
-     <string>Window</string>
+     <string>Fenêtre</string>
     </property>
     <addaction name="actionToggleSidebar" />
     <addaction name="separator" />
@@ -132,11 +132,11 @@
    <addaction name="menuFile" />
    <addaction name="menuAction" />
    <addaction name="menuWindow" />
-   <addaction name="menuHelp" />
+   <addaction name="mnHelp" />
   </widget>
   <widget class="QToolBar" name="mainToolBar" >
    <property name="windowTitle" >
-    <string>YADDConf Beta - &lt;Configuration Name></string>
+    <string>Dyprosium</string>
    </property>
    <property name="orientation" >
     <enum>Qt::Horizontal</enum>
@@ -169,9 +169,9 @@
   <widget class="QStatusBar" name="statusBar" />
   <widget class="QDockWidget" name="sideBarDock" >
    <property name="toolTip" >
-    <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">&#xd;
-p, li { white-space: pre-wrap; }&#xd;
-&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">&#xd;
+    <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">&#xd;&#xd;
+p, li { white-space: pre-wrap; }&#xd;&#xd;
+&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">&#xd;&#xd;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Sidebar&lt;/p>&lt;/body>&lt;/html></string>
    </property>
    <property name="features" >
@@ -228,7 +228,13 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/door_in.png</iconset>
    </property>
    <property name="text" >
-    <string>Exit</string>
+    <string>Quitter</string>
+   </property>
+   <property name="iconText" >
+    <string>Quitter</string>
+   </property>
+   <property name="toolTip" >
+    <string>Quitter</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+Q</string>
@@ -236,7 +242,7 @@ p, li { white-space: pre-wrap; }&#xd;
   </action>
   <action name="actionAbout" >
    <property name="text" >
-    <string>About Dyprosium..</string>
+    <string>A propos de Dyprosium..</string>
    </property>
    <property name="iconText" >
     <string>About Dyprosium</string>
@@ -253,7 +259,10 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_go.png</iconset>
    </property>
    <property name="text" >
-    <string>Export configuration...</string>
+    <string>Exporter...</string>
+   </property>
+   <property name="toolTip" >
+    <string>Exporter</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+E</string>
@@ -264,7 +273,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/folder.png</iconset>
    </property>
    <property name="text" >
-    <string>Open configuration...</string>
+    <string>Ouvrir...</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+O</string>
@@ -278,7 +287,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/disk.png</iconset>
    </property>
    <property name="text" >
-    <string>Save configuration...</string>
+    <string>Enregistrer sous...</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+S</string>
@@ -289,7 +298,10 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_star.png</iconset>
    </property>
    <property name="text" >
-    <string>New configuration...</string>
+    <string>Nouveau</string>
+   </property>
+   <property name="iconText" >
+    <string>Nouveau</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+N</string>
@@ -306,7 +318,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/application_side_tree.png</iconset>
    </property>
    <property name="text" >
-    <string>Toggle Sidebar</string>
+    <string>Basculer navigation</string>
    </property>
   </action>
   <action name="actionAddSubnet" >
@@ -314,7 +326,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/world_add.png</iconset>
    </property>
    <property name="text" >
-    <string>Add subnet</string>
+    <string>Ajouter sous-réseau</string>
    </property>
    <property name="visible" >
     <bool>false</bool>
@@ -325,7 +337,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/computer_add.png</iconset>
    </property>
    <property name="text" >
-    <string>Add reservation</string>
+    <string>Ajouter réservation</string>
    </property>
    <property name="visible" >
     <bool>false</bool>
@@ -336,7 +348,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/wrench_add.png</iconset>
    </property>
    <property name="text" >
-    <string>Add option</string>
+    <string>Ajouter option</string>
    </property>
    <property name="visible" >
     <bool>false</bool>
@@ -347,7 +359,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
    </property>
    <property name="text" >
-    <string>Add</string>
+    <string>Ajouter...</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl++</string>
@@ -361,7 +373,10 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
    </property>
    <property name="text" >
-    <string>Delete</string>
+    <string>Supprimer</string>
+   </property>
+   <property name="toolTip" >
+    <string>Suprimer</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+-</string>
@@ -378,7 +393,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_left.png</iconset>
    </property>
    <property name="text" >
-    <string>Navigate left</string>
+    <string>Précedent</string>
    </property>
    <property name="shortcut" >
     <string>Left</string>
@@ -392,7 +407,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_right.png</iconset>
    </property>
    <property name="text" >
-    <string>Navigate right</string>
+    <string>Suivant</string>
    </property>
    <property name="shortcut" >
     <string>Right</string>
@@ -403,7 +418,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/error_add.png</iconset>
    </property>
    <property name="text" >
-    <string>Add exclusion</string>
+    <string>Ajouter exclusion</string>
    </property>
    <property name="visible" >
     <bool>false</bool>
@@ -417,7 +432,13 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_delete.png</iconset>
    </property>
    <property name="text" >
-    <string>Close configuration</string>
+    <string>Fermer</string>
+   </property>
+   <property name="iconText" >
+    <string>Fermer</string>
+   </property>
+   <property name="toolTip" >
+    <string>Fermer</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+Shift+X</string>
@@ -428,7 +449,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/pencil.png</iconset>
    </property>
    <property name="text" >
-    <string>Edit</string>
+    <string>Editer...</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+/</string>
@@ -442,7 +463,7 @@ p, li { white-space: pre-wrap; }&#xd;
     <iconset resource="dyprosium.qrc" >:/images/Resources/world_delete.png</iconset>
    </property>
    <property name="text" >
-    <string>Remove Subnet</string>
+    <string>Supprimer sous-réseau</string>
    </property>
    <property name="visible" >
     <bool>false</bool>
@@ -450,7 +471,7 @@ p, li { white-space: pre-wrap; }&#xd;
   </action>
   <action name="actionReduce" >
    <property name="text" >
-    <string>Reduce</string>
+    <string>Réduire</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+M</string>
@@ -458,7 +479,7 @@ p, li { white-space: pre-wrap; }&#xd;
   </action>
   <action name="actionMaximize" >
    <property name="text" >
-    <string>Maximize</string>
+    <string>Maximiser</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+Shift+M</string>

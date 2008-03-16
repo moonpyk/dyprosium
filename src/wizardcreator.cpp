@@ -8,14 +8,14 @@ QWizardPage * WizardCreator::createAddSubNetCreateIntro (QWidget * parent /*= NU
 	retPage->setTitle(tr("Introduction"));
 
 	QLabel *introLabel = new QLabel(
-		tr("This wizard will help you create a new subnetwork on your DHCP server."
-		"This subnetwork will permit to distribute IP addresses to the network"
+		tr("Cet assistant va vous aider a créer un sous-réseau dans la configuration de votre serveur DHCP."
+		"Ce sous-réseau va permettre la distribution d'adresses IP sur le réseau"
 		));
 
 	introLabel->setWordWrap(true);
 
 	QLabel * nextLabel = new QLabel(
-		tr("Click Next to continue."));
+		tr("Cliquez sur suivant pour continuer"));
 
 	nextLabel->setWordWrap(true);
 

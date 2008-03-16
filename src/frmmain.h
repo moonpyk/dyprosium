@@ -60,6 +60,11 @@ public slots:
 	void navigateLeft();
 	void navigateRight();
 
+	void open(QString fileName = "");
+	void saveAs();
+
+	void closeCurrentConfiguration();
+
 	void selectConfigurationMode(QTreeWidgetItem* currentItem);
 
 private:
@@ -102,8 +107,6 @@ private slots:
 	
 	void on_actionEdit_triggered();
 
-	void on_actionExport_triggered();
-
 	void on_actionRemoveSubnet_triggered();
 	
 	void on_sideBarTree_currentItemChanged(QTreeWidgetItem* current, QTreeWidgetItem*);
@@ -116,10 +119,11 @@ private slots:
 	void on_actionNew_triggered();
 	void on_actionOpen_triggered();
 	void on_actionSave_triggered();
+	void on_actionExport_triggered();
 	void on_actionCloseConfiguration_triggered();
 
 	void on_pageOptionsView_valuesChanged();
-
+	
 private:
 	Ui::FrmMain ui;
 

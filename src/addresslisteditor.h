@@ -11,7 +11,7 @@ class AddressListEditor : public StringListEditor {
 public:
 	// CTor
 	AddressListEditor(QWidget *parent = 0) : StringListEditor(parent) {
-		setTitle(tr("Address list :"));
+		setTitle(tr("Liste d'adresses :"));
 		setInputMask("000.000.000.000;_");
 	}
 

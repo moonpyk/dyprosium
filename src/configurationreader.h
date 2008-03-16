@@ -3,16 +3,26 @@
 
 #include <QXmlStreamReader>
 
-#include "dhconfiguration.h"
+class DHConfiguration;
+class DHSubNetwork;
+class DHSubNetworkReservation;
+class DHOptionDuet;
 
 class ConfigurationReader : private QXmlStreamReader {
+
 public:
-	void test();
-	void read(QIODevice * device);
+	DHConfiguration * read(QIODevice * device);
+
+	QXmlStreamReader::Error error() const;
+	QString errorString() const;
+
+	qint64 columnNumber () const;
+	qint64 lineNumber () const;
 
 private:
 	void _readDyprosium();
 
+	void _readInformationsElement();
 	void _readSubNetworkList();
 	void _readSubNetwork();
 
@@ -30,11 +40,9 @@ private:
 	DHOptionDuet _readOption();
 
 	// ERRORS
-
-	void _raiseUnexpectedElementError(const QString &type);
-	void _raiseUnexpectedElementError(QStringRef type);
-
+	void _raiseUnexpectedElementError();
 	void _raiseInvalidElementError(const QString &type);
+	void _raiseInvalidFileTypeError();
 
 	// UTILS
 
@@ -44,12 +52,15 @@ private:
 	bool _getBooleanAttribute(const QString &value);
 	QString _getDescriptionAttribute();
 
-	void _resetConfig();
-	
+	void _parsePrepare();
+	void _parseEnd();
+
 private:
-	DHConfiguration * _currentConfiguration;
+	DHConfiguration * _configuration;
 	DHSubNetwork * _currentSubNetwork;
 	DHSubNetworkReservation * _currentSubNetworkReservation;
+
+	bool _gotConfigurationInformations;
 };
 
 #endif // CONFIGURATIONREADER_H

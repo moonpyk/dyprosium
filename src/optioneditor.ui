@@ -84,7 +84,7 @@
        </sizepolicy>
       </property>
       <property name="title" >
-       <string>Value</string>
+       <string>Valeur</string>
       </property>
       <layout class="QHBoxLayout" >
        <property name="spacing" >
@@ -105,7 +105,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget" >
          <property name="currentIndex" >
-          <number>3</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="pageValue" >
           <layout class="QVBoxLayout" >
@@ -124,7 +124,7 @@
            <item>
             <widget class="QLabel" name="lblValue" >
              <property name="text" >
-              <string>Value :</string>
+              <string>Valeur :</string>
              </property>
             </widget>
            </item>
@@ -163,7 +163,7 @@
            <item>
             <widget class="QLabel" name="lblAddress" >
              <property name="text" >
-              <string>IP Address :</string>
+              <string>Adresse IP :</string>
              </property>
             </widget>
            </item>

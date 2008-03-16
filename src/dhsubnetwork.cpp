@@ -353,14 +353,14 @@ QTreeWidgetItem * DHSubNetwork::subnetReservationsItemWidget() {
 
 void DHSubNetwork::_initializeTreeWidgetItems(QString networkAddressString, QString name) {
 	_subnetItemWidget = new QTreeWidgetItem(QStringList());
-	_subnetItemWidget->setText(0, tr("Range [%1] %2").arg(networkAddressString).arg(name));
+	_subnetItemWidget->setText(0, tr("Plage [%1] %2").arg(networkAddressString).arg(name));
 	_subnetItemWidget->setIcon(0, QIcon(":/images/Resources/world.png"));
 	_subnetItemWidget->setItemRole(TREE_ROLE_SUBNET);
 	_subnetItemWidget->setDataPtr(this);
 
 #ifdef SUBNET_EXCLUSIONS_SUPPORT
 	_subnetExclusionsItemWidget = new QTreeWidgetItem(_subnetItemWidget);
-	_subnetExclusionsItemWidget->setText(0, tr("Address exclusions"));
+	_subnetExclusionsItemWidget->setText(0, tr("Exclusions d'adresses"));
 	_subnetExclusionsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_delete.png"));
 	_subnetExclusionsItemWidget->setItemRole(TREE_ROLE_SUBNET_EXCLUSIONS);
 #else
@@ -368,12 +368,12 @@ void DHSubNetwork::_initializeTreeWidgetItems(QString networkAddressString, QStr
 #endif
 
 	_subnetReservationsItemWidget = new QTreeWidgetItem(_subnetItemWidget);
-	_subnetReservationsItemWidget->setText(0, tr("Address reservations"));
+	_subnetReservationsItemWidget->setText(0, tr("Réservations d'adresses"));
 	_subnetReservationsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_heart.png"));
 	_subnetReservationsItemWidget->setItemRole(TREE_ROLE_SUBNET_RESERVATIONS);
 
 	_subnetOptionsItemWidget = new QTreeWidgetItem(_subnetItemWidget);
-	_subnetOptionsItemWidget->setText(0, tr("Subnet options"));
+	_subnetOptionsItemWidget->setText(0, tr("Option de sous-réseau"));
 	_subnetOptionsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_wrench.png"));
 	_subnetOptionsItemWidget->setItemRole(TREE_ROLE_SUBNET_OPTIONS);
 }

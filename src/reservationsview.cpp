@@ -73,7 +73,7 @@ void ReservationViewLine::addLineTo(QTableWidget * widget) {
 ReservationsView::ReservationsView(QWidget *parent) : QWidget(parent) {
 	ui.setupUi(this);
 
-	ui.titleWidget->setText("Address Reservations");
+	ui.titleWidget->setText(tr("Réservations d'adresses"));
 	ui.titleWidget->setPixmap(QPixmap(":/images/Resources/folder_heart.png"));
 
 	_connectSignals();

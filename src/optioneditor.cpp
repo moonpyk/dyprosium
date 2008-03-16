@@ -97,7 +97,7 @@ DHOptionDuet OptionEditor::toDuet() {
 QDialog * OptionEditor::createDialog(QWidget *parent /*= 0*/, Qt::WindowFlags f /*= 0*/) {
 	QDialog * dialog = new QDialog(parent, f);
 	dialog->resize(563, 446);
-	dialog->setWindowTitle(tr("Dyprosium options editor"));
+	dialog->setWindowTitle(tr("Editeur d'options"));
 
 	QVBoxLayout			* vboxLayout;
 	QDialogButtonBox	* buttonBox;
