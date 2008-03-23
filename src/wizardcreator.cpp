@@ -48,7 +48,7 @@ QWizardPage * WizardCreator::createAddSubnetDNS(QWidget * parent /*= NULL*/) {
 	return new SubnetDNS(parent);
 }
 
-QWizard * WizardCreator::subnetWizard(QWidget * parent) {
+QWizard * WizardCreator::createAddSubnetWizard(QWidget * parent) {
 	QWizard * wizard = new QWizard(parent);
 
 	wizard->addPage(createAddSubNetCreateIntro(wizard));

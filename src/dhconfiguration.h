@@ -21,8 +21,12 @@ public:
 	Q_PROPERTY(QTreeWidgetItem* rootItemWidget READ rootItemWidget);
 	Q_PROPERTY(QList<DHSubNetwork *>  subNetworks READ subNetworks);
 	Q_PROPERTY(QList<DHOptionDuet> * options READ options);
+	Q_PROPERTY(QString fileName READ fileName WRITE setFileName);
 
 	virtual void setName(QString val);
+
+	QString fileName() const;
+	void setFileName(QString val);
 
 	QTreeWidgetItem * rootItemWidget();
 	QTreeWidgetItem * globalOptionsItemWidget();
@@ -52,6 +56,8 @@ private:
 
 	QList<DHSubNetwork *> _subNetworks;
 	QList<DHOptionDuet> _options;
+
+	QString _fileName;
 };
 
 Q_DECLARE_METATYPE(DHConfiguration *);

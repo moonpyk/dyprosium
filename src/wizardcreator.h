@@ -19,7 +19,7 @@ public:
 	WizardCreator(QObject * parent = NULL);
 
 public:
-	static QWizard * subnetWizard(QWidget * parent = NULL);
+	static QWizard * createAddSubnetWizard(QWidget * parent = NULL);
 
 	static QWizardPage * createAddSubNetBegin(QWidget * parent = NULL);
 	static QWizardPage * createAddSubNetCreateIntro(QWidget * parent = NULL);

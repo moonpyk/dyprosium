@@ -49,6 +49,13 @@ QList<DHOptionDuet> * DHConfiguration::options() {
 	return &_options;
 }
 
+QString DHConfiguration::fileName() const {
+	return _fileName;
+}
+
+void DHConfiguration::setFileName(QString val) {
+	_fileName = val;
+}
 // Public Methods
 
 bool DHConfiguration::addSubNetwork(DHSubNetwork * subnet) {

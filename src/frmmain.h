@@ -61,13 +61,18 @@ public slots:
 	void navigateRight();
 
 	void open(QString fileName = "");
+	void save();
 	void saveAs();
 
 	void closeCurrentConfiguration();
 
 	void selectConfigurationMode(QTreeWidgetItem* currentItem);
 
+	void show_addSubnetWizard();
+
 private:
+	void _save(const QString &fileName);
+
 	void _setCurrentConfiguration(DHConfiguration * val);
 	void _setCurrentSubNetwork(DHSubNetwork * val);
 	void _setCurrentSubNetworkReservation(DHSubNetworkReservation * val);
@@ -101,6 +106,7 @@ private:
 	void _appendConfigurationTreeItem (DHConfiguration * configuration);
 
 private slots:
+	
 	void on_actionAddOption_triggered();
 	void on_actionAddReservation_triggered();
 	void _simpleActionButtonEnabledChanged();
@@ -119,7 +125,9 @@ private slots:
 	void on_actionNew_triggered();
 	void on_actionOpen_triggered();
 	void on_actionSave_triggered();
+	void on_actionSaveAs_triggered();
 	void on_actionExport_triggered();
+
 	void on_actionCloseConfiguration_triggered();
 
 	void on_pageOptionsView_valuesChanged();

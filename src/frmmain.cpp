@@ -72,7 +72,7 @@ void FrmMain::open(QString fileName /*= ""*/) {
 			tr("Ouvrir une configuration..."),
 			QDir::currentPath(),
 			tr("Fichiers Dyprosium(*.xml)")
-			);
+		);
 	}
 	
 	if (fileName.isEmpty())
@@ -92,19 +92,32 @@ void FrmMain::open(QString fileName /*= ""*/) {
 	ConfigurationReader reader;
 	DHConfiguration * configuration = reader.read(&file);
 
-	if (!configuration) {
+	if (configuration) {
+		statusBar()->showMessage(tr("File loaded"), 2000);
+
+		_appendConfigurationTreeItem(configuration);
+
+		configuration->setFileName(fileName);
+
+	} else {
 		QMessageBox::warning(this, tr("Dyprosium"),
 			tr("Erreur de lecture dans le fichier %1 à la ligne %2, colonne %3:\n%4")
 			.arg(fileName)
 			.arg(reader.lineNumber())
 			.arg(reader.columnNumber())
 			.arg(reader.errorString()));
-
-	} else {
-		statusBar()->showMessage(tr("File loaded"), 2000);
 	}
+}
 
-	_appendConfigurationTreeItem(configuration);
+void FrmMain::save() {
+	if(_currentDHConfiguration) {
+		if(!_currentDHConfiguration->fileName().isEmpty()) {
+			_save(_currentDHConfiguration->fileName());
+
+		} else {
+			saveAs();
+		}
+	}
 }
 
 void FrmMain::saveAs() {
@@ -117,24 +130,7 @@ void FrmMain::saveAs() {
 				tr("Fichiers Dyprosium(*.xml)")
 			);
 
-		if (fileName.isEmpty())
-			return;
-
-		QFile file(fileName);
-
-		if (!file.open(QFile::WriteOnly | QFile::Text)) {
-			QMessageBox::warning(this, tr("Dyprosium"),
-				tr("Impossible d'écrire le fichier %1:\n%2.")
-				.arg(fileName)
-				.arg(file.errorString()));
-
-			return;
-		}
-
-		_currentDHConfiguration->writeXmlConfiguration(&file);
-
-		file.flush();
-		file.close();
+		_save(fileName);
 	}
 }
 
@@ -180,13 +176,58 @@ void FrmMain::navigateRight() {
 	}
 }
 
+void FrmMain::show_addSubnetWizard() {
+	QWizard * wizard = WizardCreator::createAddSubnetWizard(this);
+
+	if (wizard->exec() == QDialog::Accepted) {
+		QString name				= wizard->field(SN_WIZ_FIELD_NAME).toString();
+		QString description			= wizard->field(SN_WIZ_FIELD_DESCRIPTION).toString();
+
+		QString firstIp				= wizard->field(SN_WIZ_FIELD_FIRST_IP_ADDRESS).toString();
+		QString lastIp				= wizard->field(SN_WIZ_FIELD_LAST_IP_ADDRESS).toString();
+		QString mask				= wizard->field(SN_WIZ_FIELD_MASK_IP_ADDRESS).toString();
+		QString networkAdress		= wizard->field(SN_WIZ_FILED_NETWORK_IP_ADDRESS).toString();
+
+		QString leaseTime			= wizard->field(SN_WIZ_FIELD_LEASE_TIME).toString();
+
+		QStringList routersList		= wizard->field(SN_WIZ_FIELD_ROUTERS).toStringList();
+
+		QString dnsParentDomain		= wizard->field(SN_WIZ_FIELD_PARENT_DOMAIN).toString();
+		QStringList dnsServersList	= wizard->field(SN_WIZ_FIELD_DNSLIST).toStringList();
+
+		DHSubNetwork * newSubnet = 
+			new DHSubNetwork(name, networkAdress, mask, firstIp, lastIp);
+
+		newSubnet->setLeaseTime(leaseTime);
+		newSubnet->setDescription(description);
+
+		if(!routersList.isEmpty()) {
+			newSubnet->options()->append(DHOptionDuet(routers, routersList.join(", ")));
+		}
+
+		if (!dnsParentDomain.isEmpty()) {
+			newSubnet->options()->append(DHOptionDuet(domain_name, dnsParentDomain));
+		}
+
+		if(!dnsServersList.isEmpty()) {
+			newSubnet->options()->append(DHOptionDuet(domain_name_servers, dnsServersList.join(", ")));
+		}
+
+		if(_currentDHConfiguration) {
+			_currentDHConfiguration->addSubNetwork(newSubnet);
+		}
+	}
+
+	wizard->deleteLater();
+}
+
 /**
 * This function is executed when user selects a new QTreeWidgetItem in the sidebar.
 * It shows right configuration page, configures editor
 *
 * @param currentItem the newly selected item of the sideBar
 *
-* @see on_sideBarTree_currentItemChanged
+* @see on_sideBarTree_currentItemChanged()
 */
 void FrmMain::selectConfigurationMode(QTreeWidgetItem * currentItem) {
 	_resetCurrentConfigurationHelpers();
@@ -329,10 +370,30 @@ void FrmMain::_setWindowTitle(QTreeWidgetItem* currentItem) {
 
 // Private methods
 
+void FrmMain::_save(const QString &fileName) {
+	if (fileName.isEmpty())
+		return;
+
+	QFile file(fileName);
+
+	if (!file.open(QFile::WriteOnly | QFile::Text)) {
+		QMessageBox::warning(this, tr("Dyprosium"),
+			tr("Impossible d'écrire le fichier %1:\n%2.")
+			.arg(fileName)
+			.arg(file.errorString()));
+
+		return;
+	}
+
+	_currentDHConfiguration->writeXmlConfiguration(&file);
+
+	file.flush();
+	file.close();
+}
 /**
 * This function resets editors state between modes changes
 *
-* @see selectConfigurationMode
+* @see selectConfigurationMode()
 */
 void FrmMain::_resetCurrentConfigurationHelpers() {
 	_currentMode					= Intro;
@@ -395,6 +456,7 @@ void FrmMain::_hideAllToggleActions () {
 */
 void FrmMain::_setFileActionsEnabled(bool value) {
 	ui.actionSave->setEnabled(value);
+	ui.actionSaveAs->setEnabled(value);
 	ui.actionExport->setEnabled(value);
 	ui.actionCloseConfiguration->setEnabled(value);
 }
@@ -542,7 +604,12 @@ void FrmMain::on_actionOpen_triggered() {
 	open();	
 }
 
-void FrmMain::on_actionSave_triggered () {
+void FrmMain::on_actionSave_triggered() {
+	if(_currentDHConfiguration) {
+		save();
+	}
+}
+void FrmMain::on_actionSaveAs_triggered () {
 	if(_currentDHConfiguration) {
 		saveAs();
 	}
@@ -556,7 +623,6 @@ void FrmMain::on_actionExport_triggered() {
 
 void FrmMain::on_actionCloseConfiguration_triggered() {
 	closeCurrentConfiguration();
-
 }
 
 void FrmMain::on_actionAdd_triggered(){
@@ -582,48 +648,7 @@ void FrmMain::on_sideBarTree_currentItemChanged(QTreeWidgetItem* currentItem, QT
 }
 
 void FrmMain::on_actionAddSubnet_triggered() {
-	QWizard * wizard = WizardCreator::subnetWizard(this);
-
-	if (wizard->exec() == QDialog::Accepted) {
-		QString name				= wizard->field(SN_WIZ_FIELD_NAME).toString();
-		QString description			= wizard->field(SN_WIZ_FIELD_DESCRIPTION).toString();
-
-		QString firstIp				= wizard->field(SN_WIZ_FIELD_FIRST_IP_ADDRESS).toString();
-		QString lastIp				= wizard->field(SN_WIZ_FIELD_LAST_IP_ADDRESS).toString();
-		QString mask				= wizard->field(SN_WIZ_FIELD_MASK_IP_ADDRESS).toString();
-		QString networkAdress		= wizard->field(SN_WIZ_FILED_NETWORK_IP_ADDRESS).toString();
-
-		QString leaseTime			= wizard->field(SN_WIZ_FIELD_LEASE_TIME).toString();
-
-		QStringList routersList		= wizard->field(SN_WIZ_FIELD_ROUTERS).toStringList();
-
-		QString dnsParentDomain		= wizard->field(SN_WIZ_FIELD_PARENT_DOMAIN).toString();
-		QStringList dnsServersList	= wizard->field(SN_WIZ_FIELD_DNSLIST).toStringList();
-
-		DHSubNetwork * newSubnet = 
-			new DHSubNetwork(name, networkAdress, mask, firstIp, lastIp);
-
-		newSubnet->setLeaseTime(leaseTime);
-		newSubnet->setDescription(description);
-
-		if(!routersList.isEmpty()) {
-			newSubnet->options()->append(DHOptionDuet(routers, routersList.join(", ")));
-		}
-
-		if (!dnsParentDomain.isEmpty()) {
-			newSubnet->options()->append(DHOptionDuet(domain_name, dnsParentDomain));
-		}
-
-		if(!dnsServersList.isEmpty()) {
-			newSubnet->options()->append(DHOptionDuet(domain_name_servers, dnsServersList.join(", ")));
-		}
-
-		if(_currentDHConfiguration) {
-			_currentDHConfiguration->addSubNetwork(newSubnet);
-		}
-	}
-
-	wizard->deleteLater();
+	show_addSubnetWizard();
 }
 
 void FrmMain::on_actionRemoveSubnet_triggered() {
