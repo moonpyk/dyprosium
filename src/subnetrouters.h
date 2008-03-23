@@ -6,15 +6,15 @@
 
 #define SN_WIZ_FIELD_ROUTERS "routersList"
 
-class SubnetRouters : public QWizardPage {
+class WizardSubnetRouters : public QWizardPage {
 	Q_OBJECT
 
 public:
-	SubnetRouters(QWidget *parent = 0);
-	~SubnetRouters();
+	WizardSubnetRouters(QWidget *parent = 0);
+	~WizardSubnetRouters();
 
 private:
-	Ui::SubnetRouters ui;
+	Ui::WizardSubnetRouters ui;
 };
 
 #endif // SUBNETROUTERS_H

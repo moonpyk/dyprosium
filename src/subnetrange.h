@@ -10,11 +10,11 @@
 
 #include "ui_subnetrange.h"
 
-class SubnetRange : public QWizardPage {
+class WizardSubnetRange : public QWizardPage {
 	Q_OBJECT
 
 public:
-	SubnetRange(QWidget *parent = 0);
+	WizardSubnetRange(QWidget *parent = 0);
 
 public:
 	Q_PROPERTY(bool isComplete READ isComplete);
@@ -29,7 +29,7 @@ private:
 	void _calculateNetworkAddress(int value);
 	
 private:
-	Ui::SubnetRange ui;
+	Ui::WizardSubnetRange ui;
 
 	bool _isComplete;
 

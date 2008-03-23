@@ -1,11 +1,6 @@
 #ifndef WIZARDS_H
 #define WIZARDS_H
 
-#include <QObject>
-
-#include <QLabel>
-#include <QVBoxLayout>
-
 #include "subnetbegin.h"
 #include "subnetrange.h"
 #include "subnetleasetime.h"
@@ -21,12 +16,13 @@ public:
 public:
 	static QWizard * createAddSubnetWizard(QWidget * parent = NULL);
 
-	static QWizardPage * createAddSubNetBegin(QWidget * parent = NULL);
-	static QWizardPage * createAddSubNetCreateIntro(QWidget * parent = NULL);
-	static QWizardPage * createAddSubnetAddressRange(QWidget * parent = NULL);
-	static QWizardPage * createAddSubnetLeaseTime(QWidget * parent = NULL);
-	static QWizardPage * createAddSubnetRouters(QWidget * parent = NULL);
-	static QWizardPage * createAddSubnetDNS(QWidget * parent = NULL);
+private:
+	static QWizardPage * _createAddSubnetBegin(QWidget * parent = NULL);
+	static QWizardPage * _createAddSubnetCreateIntro(QWidget * parent = NULL);
+	static QWizardPage * _createAddSubnetAddressRange(QWidget * parent = NULL);
+	static QWizardPage * _createAddSubnetLeaseTime(QWidget * parent = NULL);
+	static QWizardPage * _createAddSubnetRouters(QWidget * parent = NULL);
+	static QWizardPage * _createAddSubnetDNS(QWidget * parent = NULL);
 };
 
 #endif //WIZARDS_H

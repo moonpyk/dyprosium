@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>SubnetBegin</class>
- <widget class="QWidget" name="SubnetBegin" >
+ <class>WizardSubnetBegin</class>
+ <widget class="QWidget" name="WizardSubnetBegin" >
   <property name="geometry" >
    <rect>
     <x>0</x>

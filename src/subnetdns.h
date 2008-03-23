@@ -10,15 +10,15 @@
 #define SN_WIZ_FIELD_PARENT_DOMAIN "parentDomain"
 #define SN_WIZ_FIELD_DNSLIST "dnsList"
 
-class SubnetDNS : public QWizardPage {
+class WizardSubnetDNS : public QWizardPage {
 	Q_OBJECT
 
 public:
-	SubnetDNS(QWidget *parent = 0);
-	~SubnetDNS();
+	WizardSubnetDNS(QWidget *parent = 0);
+	~WizardSubnetDNS();
 
 private:
-	Ui::SubnetDNS ui;
+	Ui::WizardSubnetDNS ui;
 
 private slots:
 	void on_lineDNSSolve_textChanged(const QString value);

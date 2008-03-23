@@ -7,15 +7,15 @@
 #define SN_WIZ_FIELD_NAME "name"
 #define SN_WIZ_FIELD_DESCRIPTION "description"
 
-class SubnetBegin : public QWizardPage {
+class WizardSubnetBegin : public QWizardPage {
 	Q_OBJECT
 
 public:
-	SubnetBegin(QWidget *parent = 0);
-	~SubnetBegin();
+	WizardSubnetBegin(QWidget *parent = 0);
+	~WizardSubnetBegin();
 
 private:
-	Ui::SubnetBegin ui;
+	Ui::WizardSubnetBegin ui;
 };
 
 #endif // SUBNETBEGIN_H

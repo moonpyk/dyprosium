@@ -1,6 +1,6 @@
 #include "subnetrouters.h"
 
-SubnetRouters::SubnetRouters(QWidget *parent)
+WizardSubnetRouters::WizardSubnetRouters(QWidget *parent)
 	: QWizardPage(parent)
 {
 	ui.setupUi(this);
@@ -14,4 +14,4 @@ SubnetRouters::SubnetRouters(QWidget *parent)
 	registerField(SN_WIZ_FIELD_ROUTERS, ui.routersList, "stringList", "stringListChanged");
 }
 
-SubnetRouters::~SubnetRouters() {}
+WizardSubnetRouters::~WizardSubnetRouters() {}

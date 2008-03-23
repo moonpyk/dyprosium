@@ -1,6 +1,6 @@
 #include "subnetdns.h"
 
-SubnetDNS::SubnetDNS(QWidget *parent) : QWizardPage(parent)
+WizardSubnetDNS::WizardSubnetDNS(QWidget *parent) : QWizardPage(parent)
 {
 	ui.setupUi(this);
 
@@ -18,20 +18,20 @@ SubnetDNS::SubnetDNS(QWidget *parent) : QWizardPage(parent)
 	ui.spinnerWidget->setVisible(false);
 }
 
-SubnetDNS::~SubnetDNS() { }
+WizardSubnetDNS::~WizardSubnetDNS() { }
 
-void SubnetDNS::on_btnResolve_clicked() {
+void WizardSubnetDNS::on_btnResolve_clicked() {
 	QHostInfo::lookupHost(ui.lineDNSSolve->text(), this, SLOT(appendDNSLookupResult(QHostInfo)));
 
 	ui.spinnerWidget->setVisible(true);
 	ui.btnResolve->setEnabled(false);
 }
 
-void SubnetDNS::on_lineDNSSolve_textChanged(const QString value) {
+void WizardSubnetDNS::on_lineDNSSolve_textChanged(const QString value) {
 	ui.btnResolve->setEnabled(value.length() > 0);
 }
 
-void SubnetDNS::appendDNSLookupResult(QHostInfo info) {
+void WizardSubnetDNS::appendDNSLookupResult(QHostInfo info) {
 	if(info.error() == QHostInfo::NoError) {
 		ui.dnsList->setCurrentString(info.addresses()[0].toString());
 	}

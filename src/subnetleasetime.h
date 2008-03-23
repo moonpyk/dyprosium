@@ -6,12 +6,12 @@
 
 #define SN_WIZ_FIELD_LEASE_TIME "leaseTime"
 
-class SubnetLeaseTime : public QWizardPage {
+class WizardSubnetLeaseTime : public QWizardPage {
 	Q_OBJECT
 
 public:
-	SubnetLeaseTime(QWidget *parent = 0);
-	~SubnetLeaseTime();
+	WizardSubnetLeaseTime(QWidget *parent = 0);
+	~WizardSubnetLeaseTime();
 
 public:
 	virtual bool isComplete() const;
@@ -27,7 +27,7 @@ private slots:
 private:
 	bool _isComplete;
 
-	Ui::SubnetLeaseTime ui;
+	Ui::WizardSubnetLeaseTime ui;
 };
 
 #endif // SUBNETLEASETIME_H

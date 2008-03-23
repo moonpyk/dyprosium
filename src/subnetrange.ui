@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>SubnetRange</class>
- <widget class="QWizardPage" name="SubnetRange" >
+ <class>WizardSubnetRange</class>
+ <widget class="QWizardPage" name="WizardSubnetRange" >
   <property name="geometry" >
    <rect>
     <x>0</x>

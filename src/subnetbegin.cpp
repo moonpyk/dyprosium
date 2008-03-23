@@ -1,6 +1,6 @@
 #include "subnetbegin.h"
 
-SubnetBegin::SubnetBegin(QWidget *parent) : QWizardPage(parent) {
+WizardSubnetBegin::WizardSubnetBegin(QWidget *parent) : QWizardPage(parent) {
 	ui.setupUi(this);
 
 	setTitle(tr("Nom de l'étendue"));
@@ -14,4 +14,4 @@ SubnetBegin::SubnetBegin(QWidget *parent) : QWizardPage(parent) {
 	registerField(SN_WIZ_FIELD_DESCRIPTION, ui.editDescription, "plainText", "textChanged");
 }
 
-SubnetBegin::~SubnetBegin() { }
+WizardSubnetBegin::~WizardSubnetBegin() { }

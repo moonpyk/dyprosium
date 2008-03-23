@@ -1,6 +1,6 @@
 #include "subnetleasetime.h"
 
-SubnetLeaseTime::SubnetLeaseTime(QWidget *parent) : QWizardPage(parent) {
+WizardSubnetLeaseTime::WizardSubnetLeaseTime(QWidget *parent) : QWizardPage(parent) {
 	ui.setupUi(this);
 
 	setTitle(tr("Durée du bail"));
@@ -19,17 +19,17 @@ SubnetLeaseTime::SubnetLeaseTime(QWidget *parent) : QWizardPage(parent) {
 	_checkCompleted();
 }
 
-SubnetLeaseTime::~SubnetLeaseTime() {}
+WizardSubnetLeaseTime::~WizardSubnetLeaseTime() {}
 
 // Properties
 
-bool SubnetLeaseTime::isComplete() const {
+bool WizardSubnetLeaseTime::isComplete() const {
 	return _isComplete;
 }
 
 // Private methods
 
-void SubnetLeaseTime::_setCompleted(bool val) {
+void WizardSubnetLeaseTime::_setCompleted(bool val) {
 	if(_isComplete != val) {
 		_isComplete = val;
 
@@ -37,12 +37,12 @@ void SubnetLeaseTime::_setCompleted(bool val) {
 	}
 }
 
-void SubnetLeaseTime::_checkCompleted() {
+void WizardSubnetLeaseTime::_checkCompleted() {
 	_setCompleted(ui.leaseTimeEdit->valueString() != "0");
 }
 
 // Private slots
 
-void SubnetLeaseTime::on_leaseTimeEdit_valueChanged() {
+void WizardSubnetLeaseTime::on_leaseTimeEdit_valueChanged() {
 	_checkCompleted();
 }

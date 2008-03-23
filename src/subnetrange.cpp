@@ -1,7 +1,7 @@
 #include "subnetrange.h"
 #include "iptools.h"
 
-SubnetRange::SubnetRange(QWidget *parent) : QWizardPage(parent), _isComplete(false) {
+WizardSubnetRange::WizardSubnetRange(QWidget *parent) : QWizardPage(parent), _isComplete(false) {
 	ui.setupUi(this);
 
 	this->setTitle(tr("Plage d'adresses IP"));
@@ -16,11 +16,11 @@ SubnetRange::SubnetRange(QWidget *parent) : QWizardPage(parent), _isComplete(fal
 	QObject::connect(ui.lineLastAddress, SIGNAL(textChanged(QString)), this, SLOT(addresses_textChanged(QString)));
 }
 
-bool SubnetRange::isComplete() const {
+bool WizardSubnetRange::isComplete() const {
 	return _isComplete;
 }
 
-void SubnetRange::_setIsComplete(bool val) {
+void WizardSubnetRange::_setIsComplete(bool val) {
 	if(val != _isComplete) {
 		_isComplete = val;
 
@@ -28,20 +28,20 @@ void SubnetRange::_setIsComplete(bool val) {
 	}
 }
 
-void SubnetRange::on_spinLength_valueChanged(int value) {
+void WizardSubnetRange::on_spinLength_valueChanged(int value) {
 	_calculateNetworkAddress(value);
 }
 
-void SubnetRange::addresses_textChanged(const QString value) {
+void WizardSubnetRange::addresses_textChanged(const QString value) {
 	_calculateNetworkAddress();
 	_setIsComplete(_checkComplete());
 }
 
-void SubnetRange::_calculateNetworkAddress() {
+void WizardSubnetRange::_calculateNetworkAddress() {
 	_calculateNetworkAddress(ui.spinLength->value());
 }
 
-void SubnetRange::_calculateNetworkAddress(int value) {
+void WizardSubnetRange::_calculateNetworkAddress(int value) {
 	ui.lineMask->setText(maskNumberToIPv4Netmask(value));
 
 	ui.lineNetworkAddress->setText(
@@ -49,7 +49,7 @@ void SubnetRange::_calculateNetworkAddress(int value) {
 	);
 }
 
-bool SubnetRange::_checkComplete() {
+bool WizardSubnetRange::_checkComplete() {
 	QString firstAddress	= ui.lineFirstAddress->text();
 	QString lastAddress		= ui.lineLastAddress->text();
 

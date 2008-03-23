@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>SubnetDNS</class>
- <widget class="QWidget" name="SubnetDNS" >
+ <class>WizardSubnetDNS</class>
+ <widget class="QWidget" name="WizardSubnetDNS" >
   <property name="geometry" >
    <rect>
     <x>0</x>

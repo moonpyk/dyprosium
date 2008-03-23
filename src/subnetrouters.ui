@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>SubnetRouters</class>
- <widget class="QWidget" name="SubnetRouters" >
+ <class>WizardSubnetRouters</class>
+ <widget class="QWidget" name="WizardSubnetRouters" >
   <property name="geometry" >
    <rect>
     <x>0</x>

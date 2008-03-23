@@ -1,8 +1,11 @@
 #include "wizardcreator.h"
 
+#include <QLabel>
+#include <QVBoxLayout>
+
 WizardCreator::WizardCreator (QObject * parent /*= NULL*/) : QObject(parent) {} 
 
-QWizardPage * WizardCreator::createAddSubNetCreateIntro (QWidget * parent /*= NULL*/) {
+QWizardPage * WizardCreator::_createAddSubnetCreateIntro (QWidget * parent /*= NULL*/) {
 	QWizardPage * retPage = new QWizardPage(parent);
 
 	retPage->setTitle(tr("Introduction"));
@@ -28,35 +31,35 @@ QWizardPage * WizardCreator::createAddSubNetCreateIntro (QWidget * parent /*= NU
 	return retPage;
 }
 
-QWizardPage * WizardCreator::createAddSubNetBegin(QWidget * parent /*= NULL*/) {
-	return new SubnetBegin(parent);
+QWizardPage * WizardCreator::_createAddSubnetBegin(QWidget * parent /*= NULL*/) {
+	return new WizardSubnetBegin(parent);
 }
 
-QWizardPage * WizardCreator::createAddSubnetAddressRange (QWidget * parent /*= NULL*/) {
-	return new SubnetRange(parent);
+QWizardPage * WizardCreator::_createAddSubnetAddressRange (QWidget * parent /*= NULL*/) {
+	return new WizardSubnetRange(parent);
 }
 
-QWizardPage * WizardCreator::createAddSubnetLeaseTime(QWidget * parent /*= NULL*/) {
-	return new SubnetLeaseTime(parent);
+QWizardPage * WizardCreator::_createAddSubnetLeaseTime(QWidget * parent /*= NULL*/) {
+	return new WizardSubnetLeaseTime(parent);
 }
 
-QWizardPage * WizardCreator::createAddSubnetRouters(QWidget * parent /*= NULL*/) {
-	return new SubnetRouters(parent);
+QWizardPage * WizardCreator::_createAddSubnetRouters(QWidget * parent /*= NULL*/) {
+	return new WizardSubnetRouters(parent);
 }
 
-QWizardPage * WizardCreator::createAddSubnetDNS(QWidget * parent /*= NULL*/) {
-	return new SubnetDNS(parent);
+QWizardPage * WizardCreator::_createAddSubnetDNS(QWidget * parent /*= NULL*/) {
+	return new WizardSubnetDNS(parent);
 }
 
 QWizard * WizardCreator::createAddSubnetWizard(QWidget * parent) {
 	QWizard * wizard = new QWizard(parent);
 
-	wizard->addPage(createAddSubNetCreateIntro(wizard));
-	wizard->addPage(createAddSubNetBegin(wizard));
-	wizard->addPage(createAddSubnetAddressRange(wizard));
-	wizard->addPage(createAddSubnetLeaseTime(wizard));
-	wizard->addPage(createAddSubnetRouters(wizard));
-	wizard->addPage(createAddSubnetDNS(wizard));
+	wizard->addPage(_createAddSubnetCreateIntro(wizard));
+	wizard->addPage(_createAddSubnetBegin(wizard));
+	wizard->addPage(_createAddSubnetAddressRange(wizard));
+	wizard->addPage(_createAddSubnetLeaseTime(wizard));
+	wizard->addPage(_createAddSubnetRouters(wizard));
+	wizard->addPage(_createAddSubnetDNS(wizard));
 
 	wizard->setWindowTitle(tr("Assistant de création de nouvelle étendue"));
 

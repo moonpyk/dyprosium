@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>SubnetLeaseTime</class>
- <widget class="QWidget" name="SubnetLeaseTime" >
+ <class>WizardSubnetLeaseTime</class>
+ <widget class="QWidget" name="WizardSubnetLeaseTime" >
   <property name="geometry" >
    <rect>
     <x>0</x>
