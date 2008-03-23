@@ -36,7 +36,6 @@ private:
 private slots:
 	void addresses_textChanged(const QString value);
 	void on_spinLength_valueChanged(int value);
-
 };
 
 #endif // SUBNETRANGE_H
