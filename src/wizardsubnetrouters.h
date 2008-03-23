@@ -2,7 +2,7 @@
 #define SUBNETROUTERS_H
 
 #include <QWizardPage>
-#include "ui_subnetrouters.h"
+#include "ui_wizardsubnetrouters.h"
 
 #define SN_WIZ_FIELD_ROUTERS "routersList"
 

@@ -5,7 +5,7 @@
 
 #include <QHostInfo>
 
-#include "ui_subnetdns.h"
+#include "ui_wizardsubnetdns.h"
 
 #define SN_WIZ_FIELD_PARENT_DOMAIN "parentDomain"
 #define SN_WIZ_FIELD_DNSLIST "dnsList"

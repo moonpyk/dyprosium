@@ -2,7 +2,7 @@
 #define SUBNETBEGIN_H
 
 #include <QWizardPage>
-#include "ui_subnetbegin.h"
+#include "ui_wizardsubnetbegin.h"
 
 #define SN_WIZ_FIELD_NAME "name"
 #define SN_WIZ_FIELD_DESCRIPTION "description"

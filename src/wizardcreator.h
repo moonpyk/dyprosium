@@ -1,11 +1,11 @@
 #ifndef WIZARDS_H
 #define WIZARDS_H
 
-#include "subnetbegin.h"
-#include "subnetrange.h"
-#include "subnetleasetime.h"
-#include "subnetrouters.h"
-#include "subnetdns.h"
+#include "wizardsubnetbegin.h"
+#include "wizardsubnetrange.h"
+#include "wizardsubnetleasetime.h"
+#include "wizardsubnetrouters.h"
+#include "wizardsubnetdns.h"
 
 class WizardCreator : public QObject {
 	Q_OBJECT

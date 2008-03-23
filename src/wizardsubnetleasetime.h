@@ -2,7 +2,7 @@
 #define SUBNETLEASETIME_H
 
 #include <QWizardPage>
-#include "ui_subnetleasetime.h"
+#include "ui_wizardsubnetleasetime.h"
 
 #define SN_WIZ_FIELD_LEASE_TIME "leaseTime"
 

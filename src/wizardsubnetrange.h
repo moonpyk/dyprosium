@@ -8,7 +8,7 @@
 
 #include <QWizardPage>
 
-#include "ui_subnetrange.h"
+#include "ui_wizardsubnetrange.h"
 
 class WizardSubnetRange : public QWizardPage {
 	Q_OBJECT
