@@ -78,7 +78,7 @@
             <string/>
            </property>
            <property name="pixmap" >
-            <pixmap resource="dyprosium.qrc" >:/images/Resources/lightbulb.png</pixmap>
+            <pixmap resource="Resources/Resources.qrc" >:/images/lightbulb.png</pixmap>
            </property>
           </widget>
          </item>
@@ -166,7 +166,7 @@
           <string>Ajouter option</string>
          </property>
          <property name="icon" >
-          <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
+          <iconset resource="Resources/Resources.qrc" >:/images/add.png</iconset>
          </property>
         </widget>
        </item>
@@ -227,7 +227,7 @@
               <string/>
              </property>
              <property name="icon" >
-              <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
+              <iconset resource="Resources/Resources.qrc" >:/images/add.png</iconset>
              </property>
             </widget>
            </item>
@@ -240,7 +240,7 @@
               <string/>
              </property>
              <property name="icon" >
-              <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
+              <iconset resource="Resources/Resources.qrc" >:/images/delete.png</iconset>
              </property>
             </widget>
            </item>
@@ -250,7 +250,7 @@
               <bool>false</bool>
              </property>
              <property name="icon" >
-              <iconset resource="dyprosium.qrc" >:/images/Resources/pencil.png</iconset>
+              <iconset resource="Resources/Resources.qrc" >:/images/pencil.png</iconset>
              </property>
              <property name="checked" >
               <bool>false</bool>
@@ -290,7 +290,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="dyprosium.qrc" />
+  <include location="Resources/Resources.qrc" />
  </resources>
  <connections>
   <connection>

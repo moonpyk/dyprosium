@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/images" >
+        <file>add.png</file>
+        <file>application_side_tree.png</file>
+        <file>arrow_down.png</file>
+        <file>arrow_left.png</file>
+        <file>arrow_right.png</file>
+        <file>arrow_up.png</file>
+        <file>computer.png</file>
+        <file>computer_add.png</file>
+        <file>delete.png</file>
+        <file>disk.png</file>
+        <file>disk_multiple.png</file>
+        <file>door_in.png</file>
+        <file>error_add.png</file>
+        <file>folder.png</file>
+        <file>folder_delete.png</file>
+        <file>folder_heart.png</file>
+        <file>folder_page.png</file>
+        <file>folder_wrench.png</file>
+        <file>information.png</file>
+        <file>lightbulb.png</file>
+        <file>page_white_delete.png</file>
+        <file>page_white_go.png</file>
+        <file>page_white_star.png</file>
+        <file>pencil.png</file>
+        <file>table.png</file>
+        <file>table_delete.png</file>
+        <file>world.png</file>
+        <file>world_add.png</file>
+        <file>world_delete.png</file>
+        <file>wrench.png</file>
+        <file>wrench_add.png</file>
+        <file>wrench_orange.png</file>
+    </qresource>
+    <qresource prefix="/logo" >
+        <file>Dypro.png</file>
+        <file>IconeDypro.png</file>
+    </qresource>
+</RCC>

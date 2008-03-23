@@ -13,7 +13,7 @@
    <string>Dyprosium</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="dyprosium.qrc" >:/logo/Resources/IconeDypro.png</iconset>
+   <iconset resource="Resources/Resources.qrc" >:/logo/IconeDypro.png</iconset>
   </property>
   <property name="iconSize" >
    <size>
@@ -42,7 +42,7 @@
            <string/>
           </property>
           <property name="pixmap" >
-           <pixmap resource="dyprosium.qrc" >:/logo/Resources/Dypro.png</pixmap>
+           <pixmap resource="Resources/Resources.qrc" >:/logo/Dypro.png</pixmap>
           </property>
           <property name="alignment" >
            <set>Qt::AlignCenter</set>
@@ -242,7 +242,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionExit" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/door_in.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/door_in.png</iconset>
    </property>
    <property name="text" >
     <string>Quitter</string>
@@ -276,7 +276,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_go.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/page_white_go.png</iconset>
    </property>
    <property name="text" >
     <string>Exporter...</string>
@@ -290,7 +290,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionOpen" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/folder.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/folder.png</iconset>
    </property>
    <property name="text" >
     <string>Ouvrir...</string>
@@ -304,7 +304,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/disk_multiple.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/disk_multiple.png</iconset>
    </property>
    <property name="text" >
     <string>Enregistrer sous...</string>
@@ -315,7 +315,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionNew" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_star.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/page_white_star.png</iconset>
    </property>
    <property name="text" >
     <string>Nouveau</string>
@@ -335,7 +335,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>true</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/application_side_tree.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/application_side_tree.png</iconset>
    </property>
    <property name="text" >
     <string>Basculer navigation</string>
@@ -343,7 +343,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionAddSubnet" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/world_add.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/world_add.png</iconset>
    </property>
    <property name="text" >
     <string>Ajouter sous-réseau</string>
@@ -354,7 +354,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionAddReservation" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/computer_add.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/computer_add.png</iconset>
    </property>
    <property name="text" >
     <string>Ajouter réservation</string>
@@ -365,7 +365,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionAddOption" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/wrench_add.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/wrench_add.png</iconset>
    </property>
    <property name="text" >
     <string>Ajouter option</string>
@@ -376,7 +376,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionAdd" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/add.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/add.png</iconset>
    </property>
    <property name="text" >
     <string>Ajouter...</string>
@@ -390,7 +390,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionDelete" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/delete.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/delete.png</iconset>
    </property>
    <property name="text" >
     <string>Supprimer</string>
@@ -410,7 +410,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_left.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/arrow_left.png</iconset>
    </property>
    <property name="text" >
     <string>Précedent</string>
@@ -424,7 +424,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/arrow_right.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/arrow_right.png</iconset>
    </property>
    <property name="text" >
     <string>Suivant</string>
@@ -435,7 +435,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionAddExclusion" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/error_add.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/error_add.png</iconset>
    </property>
    <property name="text" >
     <string>Ajouter exclusion</string>
@@ -449,7 +449,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/page_white_delete.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/page_white_delete.png</iconset>
    </property>
    <property name="text" >
     <string>Fermer</string>
@@ -466,7 +466,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionEdit" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/pencil.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/pencil.png</iconset>
    </property>
    <property name="text" >
     <string>Editer...</string>
@@ -480,7 +480,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </action>
   <action name="actionRemoveSubnet" >
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/world_delete.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/world_delete.png</iconset>
    </property>
    <property name="text" >
     <string>Supprimer sous-réseau</string>
@@ -510,7 +510,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="dyprosium.qrc" >:/images/Resources/disk.png</iconset>
+    <iconset resource="Resources/Resources.qrc" >:/images/disk.png</iconset>
    </property>
    <property name="text" >
     <string>Enregistrer</string>
@@ -536,7 +536,7 @@ p, li { white-space: pre-wrap; }&#xd;&#xd;&#xd;
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="dyprosium.qrc" />
+  <include location="Resources/Resources.qrc" />
  </resources>
  <connections>
   <connection>

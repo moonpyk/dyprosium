@@ -156,7 +156,7 @@ QTreeWidgetItem * DHSubNetworkReservation::treeWidgetItem() const {
 
 void DHSubNetworkReservation::_initializeTreeWidgetItem() {
 	_treeWidgetItem = new QTreeWidgetItem(QStringList());
-	_treeWidgetItem->setIcon(0, QIcon(":/images/Resources/computer.png"));
+	_treeWidgetItem->setIcon(0, QIcon(":/images/computer.png"));
 	_treeWidgetItem->setItemRole(TREE_ROLE_SUBNET_RESERVATION_OPTION);
 	_treeWidgetItem->setDataPtr(this);
 
@@ -354,14 +354,14 @@ QTreeWidgetItem * DHSubNetwork::subnetReservationsItemWidget() {
 void DHSubNetwork::_initializeTreeWidgetItems(QString networkAddressString, QString name) {
 	_subnetItemWidget = new QTreeWidgetItem(QStringList());
 	_subnetItemWidget->setText(0, tr("Plage [%1] %2").arg(networkAddressString).arg(name));
-	_subnetItemWidget->setIcon(0, QIcon(":/images/Resources/world.png"));
+	_subnetItemWidget->setIcon(0, QIcon(":/images/world.png"));
 	_subnetItemWidget->setItemRole(TREE_ROLE_SUBNET);
 	_subnetItemWidget->setDataPtr(this);
 
 #ifdef SUBNET_EXCLUSIONS_SUPPORT
 	_subnetExclusionsItemWidget = new QTreeWidgetItem(_subnetItemWidget);
 	_subnetExclusionsItemWidget->setText(0, tr("Exclusions d'adresses"));
-	_subnetExclusionsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_delete.png"));
+	_subnetExclusionsItemWidget->setIcon(0, QIcon(":/images/folder_delete.png"));
 	_subnetExclusionsItemWidget->setItemRole(TREE_ROLE_SUBNET_EXCLUSIONS);
 #else
 	_subnetExclusionsItemWidget = NULL;
@@ -369,12 +369,12 @@ void DHSubNetwork::_initializeTreeWidgetItems(QString networkAddressString, QStr
 
 	_subnetReservationsItemWidget = new QTreeWidgetItem(_subnetItemWidget);
 	_subnetReservationsItemWidget->setText(0, tr("Réservations d'adresses"));
-	_subnetReservationsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_heart.png"));
+	_subnetReservationsItemWidget->setIcon(0, QIcon(":/images/folder_heart.png"));
 	_subnetReservationsItemWidget->setItemRole(TREE_ROLE_SUBNET_RESERVATIONS);
 
 	_subnetOptionsItemWidget = new QTreeWidgetItem(_subnetItemWidget);
 	_subnetOptionsItemWidget->setText(0, tr("Option de sous-réseau"));
-	_subnetOptionsItemWidget->setIcon(0, QIcon(":/images/Resources/folder_wrench.png"));
+	_subnetOptionsItemWidget->setIcon(0, QIcon(":/images/folder_wrench.png"));
 	_subnetOptionsItemWidget->setItemRole(TREE_ROLE_SUBNET_OPTIONS);
 }
 

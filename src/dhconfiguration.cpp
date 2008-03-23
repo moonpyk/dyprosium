@@ -144,13 +144,13 @@ QString DHConfiguration::xmlConfiguration() {
 
 void DHConfiguration::_initializeTreeWidgetItems() {
 	_rootItemWidget = new QTreeWidgetItem(QStringList());
-	_rootItemWidget->setIcon(0, QIcon(":/images/Resources/folder_page.png"));
+	_rootItemWidget->setIcon(0, QIcon(":/images/folder_page.png"));
 	_rootItemWidget->setItemRole(TREE_ROLE_ROOT);
 	_rootItemWidget->setDataPtr(this);
 
 	_globalOptionsItemWidget = new QTreeWidgetItem(_rootItemWidget);
 	_globalOptionsItemWidget->setText(0, tr("Options globales"));
-	_globalOptionsItemWidget->setIcon(0, QIcon(":/images/Resources/wrench_orange.png"));
+	_globalOptionsItemWidget->setIcon(0, QIcon(":/images/wrench_orange.png"));
 	_globalOptionsItemWidget->setItemRole(TREE_ROLE_GLOBAL_OPTIONS);
 
 	_bindTreeWidgetItemName();

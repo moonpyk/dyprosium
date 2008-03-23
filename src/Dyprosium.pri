@@ -68,4 +68,4 @@ FORMS += ./frmmain.ui \
     ./timeleaseeditor.ui
 
 #Resource file(s)
-RESOURCES += Resources.qrc
+RESOURCES += ./Resources/Resources.qrc

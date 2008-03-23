@@ -74,7 +74,7 @@ ReservationsView::ReservationsView(QWidget *parent) : QWidget(parent) {
 	ui.setupUi(this);
 
 	ui.titleWidget->setText(tr("Réservations d'adresses"));
-	ui.titleWidget->setPixmap(QPixmap(":/images/Resources/folder_heart.png"));
+	ui.titleWidget->setPixmap(QPixmap(":/images/folder_heart.png"));
 
 	_connectSignals();
 

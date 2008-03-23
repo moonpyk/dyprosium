@@ -75,7 +75,7 @@ void OptionViewLine::addLineTo(QTableWidget * widget) {
 OptionsView::OptionsView(QWidget *parent) : QWidget(parent) {
 	ui.setupUi(this);
 
-	ui.titleWidget->setPixmap(QPixmap(":/images/Resources/wrench_orange.png"));
+	ui.titleWidget->setPixmap(QPixmap(":/images/wrench_orange.png"));
 
 	ui.tableOptions->verticalHeader()->hide();
 
