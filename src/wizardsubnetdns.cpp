@@ -1,4 +1,4 @@
-#include "subnetdns.h"
+#include "wizardsubnetdns.h"
 
 WizardSubnetDNS::WizardSubnetDNS(QWidget *parent) : QWizardPage(parent)
 {

@@ -1,4 +1,4 @@
-#include "subnetrange.h"
+#include "wizardsubnetrange.h"
 #include "iptools.h"
 
 WizardSubnetRange::WizardSubnetRange(QWidget *parent) : QWizardPage(parent), _isComplete(false) {

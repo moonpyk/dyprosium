@@ -1,4 +1,4 @@
-#include "subnetleasetime.h"
+#include "wizardsubnetleasetime.h"
 
 WizardSubnetLeaseTime::WizardSubnetLeaseTime(QWidget *parent) : QWizardPage(parent) {
 	ui.setupUi(this);

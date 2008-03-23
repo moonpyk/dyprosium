@@ -1,4 +1,4 @@
-#include "subnetrouters.h"
+#include "wizardsubnetrouters.h"
 
 WizardSubnetRouters::WizardSubnetRouters(QWidget *parent)
 	: QWizardPage(parent)

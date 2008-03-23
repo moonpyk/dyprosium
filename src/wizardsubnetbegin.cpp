@@ -1,4 +1,4 @@
-#include "subnetbegin.h"
+#include "wizardsubnetbegin.h"
 
 WizardSubnetBegin::WizardSubnetBegin(QWidget *parent) : QWizardPage(parent) {
 	ui.setupUi(this);
